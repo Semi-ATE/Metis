@@ -6,4 +6,3 @@ setuptools
 twine
 tree
 h5py
-pytables
