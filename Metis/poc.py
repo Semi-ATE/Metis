@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 import argparse
-from .__init__ import __version__
 
+try:
+    from .__init__ import __version__
+except:
+    from __init__ import __version__
+    
 """
 Proof of concept tool for:
     - Importing STDF binary files into HDF5 files
