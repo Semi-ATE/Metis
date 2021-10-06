@@ -1,0 +1,6 @@
+include LICENSE
+include CODEOWNERS
+recursive-include Metis *.md
+recursive-include requirements *.txt
+recursive-exclude tests *.py
+recursive-include Metis *.py
