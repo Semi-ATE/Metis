@@ -4,3 +4,5 @@ recursive-include Metis *.md
 recursive-include requirements *.txt
 recursive-exclude tests *.py
 recursive-include Metis *.py
+recursive-include documentation *.xlsx
+recursive-include tests *.stdf
