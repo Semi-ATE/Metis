@@ -6,3 +6,4 @@ setuptools
 twine
 tree
 h5py
+semi-ate-stdf
