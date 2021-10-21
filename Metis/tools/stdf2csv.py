@@ -191,18 +191,6 @@ class SCC():
                 else:
                     rec_count[rec_name] = 1
 
-                if rec_name == 'WIR':
-                    continue
-
-                if rec_name == 'PIR':
-                    continue
-
-                if rec_name == 'BPS':
-                    continue
-
-                if rec_name == 'EPS':
-                    continue
-
                 if rec_name == 'PTR' or rec_name == 'MPR' or \
                     rec_name == 'FTR' or rec_name == 'PRR':
                     part_num = pi
