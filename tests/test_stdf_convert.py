@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from Metis.poc import SHP
+from Metis.tools import SHP
+from Metis.tools import SCC
 
 import time
+import h5py
+import os
+import os.path
 
 import Semi_ATE.STDF.FAR as FAR
 import Semi_ATE.STDF.ATR as ATR
@@ -11,13 +15,60 @@ import Semi_ATE.STDF.MIR as MIR
 import Semi_ATE.STDF.PCR as PCR
 import Semi_ATE.STDF.MRR as MRR
 
-def test_1():
-        
-    stdf2hdf52pandas = SHP()
-    d1= str('d:\test')
-    stdf2hdf52pandas.import_stdf_into_hdf5(d1, "d:\test")
+# Tests are not finished yet. Only basic tests were written, not real ones.
 
-def test_make_stdf():
+def test_SHP():
+    
+    make_stdf()
+       
+    shp = SHP()
+    stdf_file = str('test.stdf')
+    out_folder = str('test_result')
+    shp.import_stdf_into_hdf5(stdf_file, out_folder)
+
+    hdf5_file = os.path.join(out_folder, '12345.hdf5')
+
+    f = h5py.File(hdf5_file,'r')
+    assert f['backup'] != None
+    assert f['raw_stdf_data'] != None
+    
+    backup_group = f['backup']
+    file = backup_group.get(stdf_file)
+    assert file != None
+
+    raw_group = f['raw_stdf_data']
+    raw_file = raw_group.get(stdf_file)
+    assert raw_file != None
+    atr = raw_file.get('ATR')
+    assert atr != None
+    far = raw_file.get('FAR')
+    assert far != None
+    mir = raw_file.get('MIR')
+    assert mir != None
+    mrr = raw_file.get('MRR')
+    assert mrr != None
+    pcr = raw_file.get('PCR')
+    assert pcr != None
+    
+    f.close()
+    
+def test_SCC():
+
+    make_stdf()
+
+    scc = SCC()
+    stdf_file = str('test.stdf')
+    out_folder = str('test_result')
+    scc.convert(stdf_file, out_folder)
+    
+    csv_files = ['ATR.csv', 'FAR.csv', 'MIR.csv', 'MRR.csv', 'PCR.csv']
+    
+    for csv_file in csv_files:
+        file = os.path.join(out_folder, csv_file)
+        assert os.path.getsize(file) > 0
+
+
+def make_stdf():
     
     with open('test.stdf', 'wb') as f:
 
@@ -48,7 +99,7 @@ def test_make_stdf():
         mir.set_value('PROT_COD', ' ')
         mir.set_value('BURN_TIM', 65535)
         mir.set_value('CMOD_COD', ' ')
-        mir.set_value('LOT_ID', 'NAS9999')
+        mir.set_value('LOT_ID', '12345')
         mir.set_value('PART_TYP', 'HAL3715')
         mir.set_value('NODE_NAM', 'Node123')
         mir.set_value('TSTR_TYP', 'SCT')

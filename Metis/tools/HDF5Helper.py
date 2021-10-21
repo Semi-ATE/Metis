@@ -55,16 +55,18 @@ class HDF5Helper():
             hash_sum_file = HDF5Helper.get_check_sum(bin_file)
             print(f"The file {bin_file_name} is already imported, nothing to do")
             h = hashlib.sha256()
-            b = bytearray(hdf5_group[bin_file_name])
-            h.update(b)
-            hash_sum_dataset = h.hexdigest()
+            #ToDo Too slow . Need to find faster alternative
+            #b = bytearray(hdf5_group[bin_file_name])
+            #h.update(b)
+            #hash_sum_dataset = h.hexdigest()
             
-            if hash_sum_file != hash_sum_dataset:
-                print(f"File exists in the hdf5 file, but check sum differ from the input file")
-                print(f"SHA256 check sum {bin_file_name} :\n{hash_sum_file}")
-                print(f"SHA256 check sum for the dataset :\n{hash_sum_dataset}")
-                hdf5.close()
-                return False
+            #if hash_sum_file != hash_sum_dataset:
+            #    print(f"File exists in the hdf5 file, but check sum differ from the input file")
+            #    print(f"SHA256 check sum {bin_file_name} :\n{hash_sum_file}")
+            #    print(f"SHA256 check sum for the dataset :\n{hash_sum_dataset}")
+            #    hdf5.close()
+            #    return False
+            return False
             
         else:
             # File does not exists, try to import
