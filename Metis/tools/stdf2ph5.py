@@ -274,6 +274,8 @@ class SHP():
         ftr_columns = [STDFHelper.PART_INDEX]        
         ftr_columns.extend(STDFHelper.get_stdf_rec_fields(FTR()))
         ftr_columns.extend(STDFHelper.get_stdf_rec_fields(BPS()))
+        # Issue #8 Make extra column in the FTR dataframe for part retest/pass/fail
+        ftr_columns.extend('RESULT')
         ftr = pd.DataFrame(columns = ftr_columns)
         ftr.name = 'FTR'        
         dataframes[ftr.name] = ftr
@@ -453,13 +455,19 @@ class SHP():
                         s += 'BPS.SEQ_NAME,'
                         
                 if record_name == 'WRR':
-                        s += 'WIR.START_T,'
-        
+                    s += 'WIR.START_T,'
+
+                # Issue #8
+                # Make extra column in the FTR dataframe for part retest/pass/fail
+                if record_name == 'FTR':
+                    s += 'RESULT,'
+                
                 fields = stdr_record.fields.keys()
                 for field_name in fields:
                     if field_name not in ignore_fields:
                         column_name = record_name+"."+field_name
                         s += column_name + ','
+                        
                 s = s[:-1] + '\n'
                 f.write(s)
         
@@ -476,6 +484,24 @@ class SHP():
                 wafer_id = stdf_record.get_value('WAFER_ID')
                 start_t = wir_start_t[wafer_id]
                 s += str(start_t) + ','
+
+            # Issue #8
+            # Make extra column in the FTR dataframe for part retest/pass/fail
+            if record_name == 'FTR':
+                test_flg = stdr_record.fields['TEST_FLG']['Value']
+                if len(test_flg) > 0:
+                    if test_flg[6] == '1':
+                        s += '0,'
+                    elif test_flg[7] == '1':
+                        s += '1,'
+                    elif test_flg[7] == '0':
+                        s += '2,'
+                    else:
+                        err = f"Not valid 7th bit value in the FTR record for part index {part_index}.\n"
+                        err += f"Expected 0, but got {test_flg[7]}"
+                        raise Exception(err)
+                else:
+                    s += '-1,'
 
             fields = stdr_record.fields.keys()
             for field_name in fields:
