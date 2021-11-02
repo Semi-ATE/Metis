@@ -5,6 +5,7 @@ import os
 import os.path
 import pandas as pd
 from tqdm import tqdm
+from ast import literal_eval
 
 import Semi_ATE.STDF.FAR as FAR
 import Semi_ATE.STDF.ATR as ATR
@@ -31,7 +32,6 @@ import Semi_ATE.STDF.BPS as BPS
 import Semi_ATE.STDF.EPS as EPS
 import Semi_ATE.STDF.GDR as GDR
 import Semi_ATE.STDF.DTR as DTR
-
 try:
     from .STDFHelper import STDFHelper
     from .HDF5Helper import HDF5Helper
@@ -412,12 +412,13 @@ class SHP():
         dataset_path = SHP.STDF_RECORDS_DIR+'/'+file_name+'/'
 
         for record_name in frames.keys():
-            
+           
             fn = record_name + ".csv"
             if os.path.isfile(fn):
                 data = pd.read_csv(fn) 
                 data_loc = dataset_path+record_name
-                # Sets string type for STDF fields with C*n type after CSV import
+                # Sets string type for STDF fields with C*n/B*n/kxTYPE type 
+                # after CSV import
                 fields = data.keys()
                 for field in fields:
                     if field in str_fields:
@@ -511,16 +512,9 @@ class SHP():
                     column_name = record_name+"."+field_name
                     value = stdr_record.fields[field_name]['Value']
                     # Converting the list as string
-                    # like ['1', '1', '0', '0', '1', '1'] -> 110011
                     if type(value) == list:
                         v = str(value)
-                        v = v.replace(',','')
-                        v = v.replace('[','')
-                        v = v.replace(']','')
-                        value = v.replace('\'','')
-                        value = '"' + value + '"'
-                        s += value.replace(' ', '')
-                        s += ','
+                        s += '"' + v + '",'
                         continue
                     else:
                         value = str(value)
@@ -574,6 +568,7 @@ def main():
         debug = False
     else:
         debug = True
+        
     
     stdf2hdf52pandas = SHP(debug)
     for input_file in args.input:

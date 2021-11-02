@@ -78,13 +78,7 @@ class SCC():
                     #Converting the list as string
                     if type(value) == list:
                         v = str(value)
-                        v = v.replace(',','')
-                        v = v.replace('[','')
-                        v = v.replace(']','')
-                        value = v.replace('\'','')
-                        value = '"' + value + '"'
-                        s += value.replace(' ', '')
-                        s += ','
+                        s += '"' + v + '",'
                         continue
                     else:
                         value = str(value)

@@ -242,10 +242,13 @@ class STDFHelper():
         for field_name in fields:
         
             field_type = stdf_record.fields[field_name]['Type']
-            if field_type.startswith('C'):
-                full_field_name = rec_name+'.'+field_name
-                if full_field_name not in str_fields:
-                    str_fields.append(full_field_name)
+            if field_type.startswith('C') or \
+                field_type.startswith('B*') or \
+                field_type.startswith('x'):
+
+                    full_field_name = rec_name+'.'+field_name
+                    if full_field_name not in str_fields:
+                        str_fields.append(full_field_name)
 
     def get_stdf_record(ver, byteorder, rec_len, rec_typ, rec_sub, rec):
 

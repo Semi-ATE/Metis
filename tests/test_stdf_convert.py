@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-
-from Metis.tools import SHP
-from Metis.tools import SCC
-
 import time
 import h5py
 import os
 import os.path
+
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 
 import Semi_ATE.STDF.FAR as FAR
 import Semi_ATE.STDF.ATR as ATR
@@ -14,6 +14,10 @@ import Semi_ATE.STDF.WIR as WIR
 import Semi_ATE.STDF.MIR as MIR
 import Semi_ATE.STDF.PCR as PCR
 import Semi_ATE.STDF.MRR as MRR
+
+from Metis.tools.stdf2ph5 import SHP
+from Metis.tools.stdf2csv import SCC
+
 
 # Tests are not finished yet. Only basic tests were written, not real ones.
 
