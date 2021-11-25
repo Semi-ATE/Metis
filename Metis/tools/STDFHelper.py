@@ -71,9 +71,9 @@ class STDFHelper():
             if rec_sub != b'\x0A':
                 return False
 
-            if bo == 1:
+            if bo == b'\x01':
                 byteorder = 'big'
-            elif bo == 2:
+            elif bo == b'\x02':
                 byteorder = 'little'
             else:
                 byteorder = sys.byteorder
@@ -107,9 +107,9 @@ class STDFHelper():
             # Skip the first 4 bytes
             f.read(4)
             bo = f.read(1)
-            if bo == 1:
+            if bo == b'\x01':
                 byteorder = 'big'
-            elif bo == 2:
+            elif bo == b'\x02':
                 byteorder = 'little'
             else:
                 byteorder = sys.byteorder
