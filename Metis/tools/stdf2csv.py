@@ -177,6 +177,12 @@ class SCC():
                 progress.update(1)
                 
                 stdf_record = STDFHelper.get_stdf_record(ver, byteorder, rec_len, rec_typ, rec_sub, rec)
+                
+                if stdf_record == None:
+                    rt = int.from_bytes(rec_typ, byteorder)
+                    rs = int.from_bytes(rec_sub, byteorder)
+                    print(f"Unknown STDF record with record type {rt} and sub-type {rs}.")
+                    continue
 
                 rec_name = type(stdf_record).__name__
                                 
