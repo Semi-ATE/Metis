@@ -3,4 +3,3 @@ h5py
 semi-ate-stdf
 pandas
 tables
-pytable
