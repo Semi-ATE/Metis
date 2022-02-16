@@ -1,7 +1,5 @@
-twine
-tree
-tqdm
-h5py
+h5py    
 semi-ate-stdf
 pandas
+tqdm
 tables
