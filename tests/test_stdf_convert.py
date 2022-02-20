@@ -14,6 +14,7 @@ import Semi_ATE.STDF.WIR as WIR
 import Semi_ATE.STDF.MIR as MIR
 import Semi_ATE.STDF.PCR as PCR
 import Semi_ATE.STDF.MRR as MRR
+import Semi_ATE.STDF.WRR as WRR
 
 from Metis.tools.stdf2ph5 import SHP
 from Metis.tools.stdf2csv import SCC
@@ -90,7 +91,7 @@ def make_stdf():
         wir.set_value('HEAD_NUM', 1)
         wir.set_value('SITE_GRP', 1)
         wir.set_value('START_T', int(time.time()))
-        wir.set_value('WAFER_ID', "WFR_ID_123456789")
+        wir.set_value('WAFER_ID', "WFR_NAS9999")
         f.write(wir.__repr__())
         
         
@@ -150,4 +151,21 @@ def make_stdf():
         mrr.set_value('DISP_COD', 'Z')    
         mrr.set_value('USR_DESC', 'NAS12345')
         mrr.set_value('EXC_DESC', '12345')
-        f.write(mrr.__repr__())
+        f.write(mrr.__repr__())        
+        
+        wrr = WRR()
+        wrr.set_value('HEAD_NUM', 1)
+        wrr.set_value('SITE_GRP', 1)
+        wrr.set_value('FINISH_T', 1609462861)
+        wrr.set_value('PART_CNT', 11234567)
+        wrr.set_value('RTST_CNT', 123)
+        wrr.set_value('ABRT_CNT', 0)
+        wrr.set_value('GOOD_CNT', 11234444)
+        wrr.set_value('FUNC_CNT', 0)
+        wrr.set_value('WAFER_ID', 'WFR_NAS9999')
+        wrr.set_value('FABWF_ID', 'FABWFR_FR')
+        wrr.set_value('FRAME_ID', 'FRAME_213141')
+        wrr.set_value('MASK_ID', 'MASK_131212')
+        wrr.set_value('USR_DESC', 'USR_DESC')
+        wrr.set_value('EXC_DESC', 'DESC_NOTHING')
+        f.write(wrr.__repr__())        

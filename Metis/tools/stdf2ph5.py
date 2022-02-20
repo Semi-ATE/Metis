@@ -482,7 +482,7 @@ class SHP():
                     s += bps_seq_name + ','
     
             if record_name == 'WRR':
-                wafer_id = stdf_record.get_value('WAFER_ID')
+                wafer_id = stdr_record.get_value('WAFER_ID')
                 start_t = wir_start_t[wafer_id]
                 s += str(start_t) + ','
 
