@@ -481,7 +481,6 @@ class SHP():
                 if bps_seq_name != None:
                     s += bps_seq_name + ','
     
-            print("===")
             if record_name == 'WRR':
                 wafer_id = stdr_record.get_value('WAFER_ID')
                 start_t = wir_start_t[wafer_id]

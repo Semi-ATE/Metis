@@ -91,7 +91,7 @@ def make_stdf():
         wir.set_value('HEAD_NUM', 1)
         wir.set_value('SITE_GRP', 1)
         wir.set_value('START_T', int(time.time()))
-        wir.set_value('WAFER_ID', "WFR_ID_123456789")
+        wir.set_value('WAFER_ID', "WFR_NAS9999")
         f.write(wir.__repr__())
         
         
