@@ -34,3 +34,4 @@ The Greek word metis meant a quality that combined wisdom and cunning. This qual
 Result : 
 - No more fiddling around with STDF parsers, but working with data 1 second after the tester has finished! (or even WHILE the tester is still running ?!?)
 - Custom tools can set-up from this level much easier!
+- Dashboards (à la "[Voilà](https://blog.jupyter.org/and-voil%C3%A0-f6a2c08a4a93)"?)can be set up from this level also much easier!
