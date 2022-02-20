@@ -1,4 +1,4 @@
-# Semi-ATE-Metis
+# Semi-ATE's Metis
 STDF to PANDAS data frames conversion.
 
 [![CI](https://github.com/Semi-ATE/Metis/workflows/CI/badge.svg?branch=main)](https://github.com/Semi-ATE/Metis/actions?query=workflow%3ACI)
