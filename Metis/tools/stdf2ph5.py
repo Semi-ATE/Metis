@@ -4,8 +4,6 @@ import time
 import os
 import os.path
 import pandas as pd
-from tqdm import tqdm
-from ast import literal_eval
 
 import Semi_ATE.STDF.FAR as FAR
 import Semi_ATE.STDF.ATR as ATR
@@ -19,17 +17,14 @@ import Semi_ATE.STDF.PGR as PGR
 import Semi_ATE.STDF.PLR as PLR
 import Semi_ATE.STDF.RDR as RDR
 import Semi_ATE.STDF.SDR as SDR
-import Semi_ATE.STDF.WIR as WIR
 import Semi_ATE.STDF.WRR as WRR
 import Semi_ATE.STDF.WCR as WCR
-import Semi_ATE.STDF.PIR as PIR
 import Semi_ATE.STDF.PRR as PRR
 import Semi_ATE.STDF.TSR as TSR
 import Semi_ATE.STDF.PTR as PTR
 import Semi_ATE.STDF.MPR as MPR
 import Semi_ATE.STDF.FTR as FTR
 import Semi_ATE.STDF.BPS as BPS
-import Semi_ATE.STDF.EPS as EPS
 import Semi_ATE.STDF.GDR as GDR
 import Semi_ATE.STDF.DTR as DTR
 try:
@@ -74,7 +69,7 @@ class SHP():
         if self.debug:
             print("Debug is enabled")
             
-    def import_stdf_into_hdf5(self, input_stdf_file, output_folder):
+    def import_stdf_into_hdf5(self, input_stdf_file, output_folder, disable_progress = False, disable_trace = False):
         '''
         Imports binary STDF file into HDF5 file in the following sequence:
         1. Takes the LOT_ID field value from the STDF MIR record
@@ -140,7 +135,7 @@ class SHP():
         hdf5_file = os.path.join(out_folder, lot_id + ".hdf5")
         res = HDF5Helper.import_binary_file(hdf5_file, SHP.STDF_FILES_DIR, stdf_file)
         if res:
-            self.stdf2pandas(stdf_file, hdf5_file)
+            self.stdf2pandas(stdf_file, hdf5_file, disable_progress, disable_trace)
 
     def create_empty_pandas_data_frames(self):
         
@@ -308,7 +303,7 @@ class SHP():
 
         return frames
     
-    def stdf2pandas(self, stdf_file, output_file):
+    def stdf2pandas(self, stdf_file, output_file, disable_progress = False, disable_trace = False):
         
         frames = self.create_empty_pandas_data_frames()
                 
@@ -335,10 +330,13 @@ class SHP():
         # Key is WAFER_ID
         # Value is WIR.START_T
         wir_start_t = {}
+        
+        if disable_trace == False:
+            print(f"Parsing stdf file {stdf_file} is in progress:")
 
-        print(f"Parsing stdf file {stdf_file} is in progress:")
-
-        progress = tqdm(total = self.records_count, unit = " records", position=0 , leave=True)
+        if disable_progress == False:
+            from tqdm import tqdm
+            progress = tqdm(total = self.records_count, unit = " records", position=0 , leave=True)
         
         with open(stdf_file, "rb") as f:            
             
@@ -356,7 +354,8 @@ class SHP():
                 # Get rest of the record
                 rec = f.read(len_rec)
 
-                progress.update(1)
+                if disable_progress == False:
+                    progress.update(1)
                 
                 stdf_record = STDFHelper.get_stdf_record(ver, byteorder, rec_len, rec_typ, rec_sub, rec)
 
@@ -403,8 +402,10 @@ class SHP():
                     if self.debug:
                         if pi != None:
                             print(f"Data for part # {pi} was saved.")
-        progress.close()
-        print(f"\nImporting stdf data as pandas dataframe into hdf5 file {output_file} ...")
+        if disable_progress == False:
+            progress.close()
+        if disable_trace == False:
+            print(f"\nImporting stdf data as pandas dataframe into hdf5 file {output_file} ...")
         
         start = time.time()
         
@@ -428,16 +429,14 @@ class SHP():
 
         stop = time.time()
         import_time = stop-start
-        print("Import process took {:.2f} sec.".format(import_time))
-                                            
-        print(f"Number of imported records :")
-        for r_name in rec_count:
-            print(f"{r_name} : {rec_count[r_name]}")
+        if disable_trace == False:
+            print("Import process took {:.2f} sec.".format(import_time))
+            print("Number of imported records :")
+            for r_name in rec_count:
+                print(f"{r_name} : {rec_count[r_name]}")
 
     def stdf2csv(self, stdr_record, part_index, bps_seq_name, wir_start_t):
 
-        fields_names = []
-        
         record_name = type(stdr_record).__name__
         
         # Skip writing fields from the header. 
