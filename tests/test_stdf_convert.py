@@ -65,7 +65,7 @@ def test_SCC():
     scc = SCC()
     stdf_file = str('test.stdf')
     out_folder = str('test_result')
-    scc.convert(stdf_file, out_folder)
+    scc.convert(stdf_file, out_folder, disable_progress = True)
     
     csv_files = ['ATR.csv', 'FAR.csv', 'MIR.csv', 'MRR.csv', 'PCR.csv']
     
