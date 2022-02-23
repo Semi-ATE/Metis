@@ -7,3 +7,9 @@ recursive-include Metis *.py
 recursive-include documentation *.xlsx
 recursive-include documentation *.pptm
 recursive-include tests *.stdf
+recursive-include documentation *.PNG
+recursive-include documentation *.md
+recursive-include documentation *.pdf
+recursive-include documentation *.png
+recursive-include documentation *.pptx
+recursive-include documentation *.xcf
