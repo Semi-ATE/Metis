@@ -34,6 +34,7 @@ def test_SHP():
     hdf5_file = os.path.join(out_folder, '12345.hdf5')
 
     f = h5py.File(hdf5_file,'r')
+
     assert f['backup'] != None
     assert f['raw_stdf_data'] != None
     
