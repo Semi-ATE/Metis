@@ -34,6 +34,7 @@ def test_SHP():
     hdf5_file = os.path.join(out_folder, '12345.hdf5')
 
     f = h5py.File(hdf5_file,'r')
+
     assert f['backup'] != None
     assert f['raw_stdf_data'] != None
     
@@ -64,7 +65,7 @@ def test_SCC():
     scc = SCC()
     stdf_file = str('test.stdf')
     out_folder = str('test_result')
-    scc.convert(stdf_file, out_folder)
+    scc.convert(stdf_file, out_folder, disable_progress = True)
     
     csv_files = ['ATR.csv', 'FAR.csv', 'MIR.csv', 'MRR.csv', 'PCR.csv']
     

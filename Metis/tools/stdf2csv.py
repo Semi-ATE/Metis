@@ -2,19 +2,14 @@
 import argparse
 import os
 import os.path
-from tqdm import tqdm
 
-import Semi_ATE.STDF.PTR as PTR
-import Semi_ATE.STDF.MPR as MPR
-import Semi_ATE.STDF.FTR as FTR
-import Semi_ATE.STDF.PRR as PRR
 
 try:
     from .STDFHelper import STDFHelper
-    from .HDF5Helper import HDF5Helper
+#    from .HDF5Helper import HDF5Helper
 except:
     from STDFHelper import STDFHelper
-    from HDF5Helper import HDF5Helper
+#    from HDF5Helper import HDF5Helper
     
 """
 This is a tool which converts stdf file in multiple CSV files.
@@ -36,10 +31,8 @@ class SCC():
         if self.debug:
             print("Debug is enabled")
 
-    def stdf2csv(self, stdr_record, output_folder, part_num):
-
-        fields_names = []
-        
+    def stdf2csv(self, stdr_record, output_folder, part_num, disable_trace = False):
+       
         record_name = type(stdr_record).__name__
 
         csv_file = os.path.join(output_folder, record_name + '.csv' )
@@ -48,7 +41,8 @@ class SCC():
                
         # Writing headers if file does not exists:
         if os.path.isfile(csv_file) == False: 
-            print(f"File {csv_file} was created.")
+            if disable_trace == False:
+                print(f"File {csv_file} was created.")
             with open(csv_file, 'w') as f:
                 s = ''
 
@@ -94,7 +88,7 @@ class SCC():
             f.write(s)         
             
             
-    def convert(self, input_stdf_file, output_folder):
+    def convert(self, input_stdf_file, output_folder, disable_progress = False, disable_trace = False):
         '''
         Put here the description:
             ...
@@ -156,7 +150,9 @@ class SCC():
         
         pi = 1
         
-        progress = tqdm(total = records_count, unit = " records")
+        if disable_progress == False:
+            from tqdm import tqdm
+            progress = tqdm(total = records_count, unit = " records")
                 
         with open(stdf_file, "rb") as f:            
             
@@ -174,7 +170,8 @@ class SCC():
                 # Get rest of the record
                 rec = f.read(len_rec)
                 
-                progress.update(1)
+                if disable_progress == False:
+                    progress.update(1)
                 
                 stdf_record = STDFHelper.get_stdf_record(ver, byteorder, rec_len, rec_typ, rec_sub, rec)
                 
@@ -197,7 +194,7 @@ class SCC():
                 else:
                     part_num = None
                 
-                self.stdf2csv(stdf_record, output_folder, part_num)
+                self.stdf2csv(stdf_record, output_folder, part_num, disable_trace)
 
                 if rec_name == "PRR":
                     pi = pi + 1
@@ -205,11 +202,13 @@ class SCC():
                         if part_num != None:
                             print(f"Data for part # {part_num} was saved.")
 
-        progress.close()
-    
-        print(f"Number of imported records :")
-        for r_name in rec_count:
-            print(f"{r_name} : {rec_count[r_name]}")
+        if disable_progress == False:
+            progress.close()
+
+        if disable_trace == False:         
+            print("Number of imported records :")
+            for r_name in rec_count:
+                print(f"{r_name} : {rec_count[r_name]}")
             
                             
 
