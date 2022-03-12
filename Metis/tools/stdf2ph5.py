@@ -331,6 +331,13 @@ class SHP():
         # Value is WIR.START_T
         wir_start_t = {}
         
+
+	# issue 26
+        # In the case when WRR does not have WAFER_ID, take the last start_t
+        last_wir_start_t = 0
+        # In the case when WRR does not have WAFER_ID, save the last WAFER_ID
+        last_wir_wafer_id = 0
+        
         if disable_trace == False:
             print(f"Parsing stdf file {stdf_file} is in progress:")
 
@@ -385,6 +392,8 @@ class SHP():
                     wafer_id = stdf_record.get_value('WAFER_ID')
                     start_t = stdf_record.get_value('START_T')
                     wir_start_t[wafer_id] = start_t
+                    last_wir_start_t = start_t
+                    last_wir_wafer_id = wafer_id
                     continue
                 
                 if rec_name == 'PTR' or rec_name == 'MPR' or \
@@ -395,7 +404,7 @@ class SHP():
 
                 # DataFrame.append is too slow, so first we will create 
                 # a temporary csv and later we will import it as DataFrame
-                self.stdf2csv(stdf_record, pi, bps_seq_name, wir_start_t)
+                self.stdf2csv(stdf_record, pi, bps_seq_name, wir_start_t, last_wir_start_t, last_wir_wafer_id)
                 
                 if rec_name == "PRR":
                     part_index = part_index + 1
@@ -435,7 +444,7 @@ class SHP():
             for r_name in rec_count:
                 print(f"{r_name} : {rec_count[r_name]}")
 
-    def stdf2csv(self, stdr_record, part_index, bps_seq_name, wir_start_t):
+    def stdf2csv(self, stdr_record, part_index, bps_seq_name, wir_start_t, last_wir_start_t, last_wir_wafer_id):
 
         record_name = type(stdr_record).__name__
         
@@ -456,7 +465,6 @@ class SHP():
                         
                 if record_name == 'WRR':
                     s += 'WIR.START_T,'
-
                 # Issue #8
                 # Make extra column in the FTR dataframe for part retest/pass/fail
                 if record_name == 'FTR':
@@ -482,8 +490,13 @@ class SHP():
     
             if record_name == 'WRR':
                 wafer_id = stdr_record.get_value('WAFER_ID')
-                start_t = wir_start_t[wafer_id]
-                s += str(start_t) + ','
+                if len(wafer_id) > 0 and wafer_id in wir_start_t:
+                        # Issue #26
+                        # Set WIR.START_T from WIR in WRR if it does not exists
+                        start_t = wir_start_t[wafer_id]
+                        s += str(start_t) + ','
+                else:
+                        s += str(last_wir_start_t) + ','
 
             # Issue #8
             # Make extra column in the FTR dataframe for part retest/pass/fail
@@ -521,6 +534,13 @@ class SHP():
                     ftype = stdr_record.fields[field_name]['Type']
                         
                     if len(value) == 0:
+                        
+                        # Issue #26
+                        # Set WAFER_ID from WIR in WRR if it does not exists
+                        if field_name == "WAFER_ID":
+                            v = str(last_wir_wafer_id)
+                            s += '"' + v + '",'
+                            continue
                         # Setup default values if they are missing
                         # This prevent csv import to pandas to set wrong column type
                         # Unfortunately dtype arg does not works in pandas.read_csv
