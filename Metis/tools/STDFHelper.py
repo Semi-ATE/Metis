@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import os
 import sys
-import pandas as pd
-import numpy as np
 
-import Semi_ATE.STDF.STDR as STDR
 import Semi_ATE.STDF.FAR as FAR
 import Semi_ATE.STDF.ATR as ATR
 import Semi_ATE.STDF.MIR as MIR
@@ -31,7 +27,6 @@ import Semi_ATE.STDF.BPS as BPS
 import Semi_ATE.STDF.EPS as EPS
 import Semi_ATE.STDF.GDR as GDR
 import Semi_ATE.STDF.DTR as DTR
-import Semi_ATE.STDF.utils as u
 
 
 class STDFHelper():
@@ -384,7 +379,7 @@ class STDFHelper():
                 f.read(1)
                 len_rec = int.from_bytes(rec_len, byteorder)
                 # Get rest of the record
-                rec = f.read(len_rec)
+                f.read(len_rec)
                 record_number = record_number + 1
                 
         return record_number
