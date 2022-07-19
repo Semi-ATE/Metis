@@ -14,9 +14,8 @@ jobs:
           python-version: '3.8'
       - name: Setup dependencies
         run: |
-          conda config --add channels conda-forge
-          sudo apt-get install -y libhdf5-dev inotify-tools
-          conda install -c conda-forge gst-plugins-base gst-python gstreamer
+          sudo apt-get install -y libhdf5-dev inotify-tools libgirepository1.0-dev
+          mamba install -c conda-forge gst-plugins-base gst-python gstreamer
           pip install -r requirements/run.txt
           pip install -r requirements/test.txt
       - name: Run tests
