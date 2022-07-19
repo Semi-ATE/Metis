@@ -7,6 +7,3 @@ inotify
 gobject 
 PyGObject
 pyaml 
-gst-plugins-base 
-gst-python 
-gstreamer
