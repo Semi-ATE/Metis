@@ -1,0 +1,10 @@
+Package: metis-server
+Version: 0.0.1
+Architecture: amd64
+Maintainer: Velislav-Boyanov <vboy@semi-ate.com>
+Installed-Size: 57
+Section: unknown
+Priority: optional
+Homepage: https://github.com/Semi-ATE/Metis
+Description: Metis server.
+ This server will handle STDF.

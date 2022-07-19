@@ -3,3 +3,10 @@ semi-ate-stdf
 pandas
 tqdm
 tables
+inotify
+gobject 
+PyGObject
+pyaml 
+gst-plugins-base 
+gst-python 
+gstreamer

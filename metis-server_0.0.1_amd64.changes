@@ -1,0 +1,26 @@
+Format: 1.8
+Date: Sat, 04 Jun 2022 16:10:54 +0300
+Source: metis-server
+Binary: metis-server
+Built-For-Profiles: noudeb
+Architecture: amd64
+Version: 0.0.1
+Distribution: stable
+Urgency: low
+Maintainer: Velislav-Boyanov <vboy@semi-ate.com>
+Changed-By: Velislav-Boyanov <vboy@semi-ate.com>
+Description:
+ metis-server - Metis server.
+Changes:
+ metis-server (0.0.1) stable; urgency=low
+ .
+   * See changelog file in the github release page.
+Checksums-Sha1:
+ 6a69a1e0eb28bd74b2410190e3b0d17b6b545082 4735 metis-server_0.0.1_amd64.buildinfo
+ 8d6432b74f75a7139750225acd55956a047d8572 7316 metis-server_0.0.1_amd64.deb
+Checksums-Sha256:
+ 12c7f5c23ace9412fcff033f2c2e3be7c75715df1c67b7b1707114213ca3cda9 4735 metis-server_0.0.1_amd64.buildinfo
+ ab975b9fcd1b22ebdf8fb51ab42b46ef863b9e67243731c87d3cd88463716223 7316 metis-server_0.0.1_amd64.deb
+Files:
+ 3f54445f5004963a251ba8a7a24ec862 4735 unknown optional metis-server_0.0.1_amd64.buildinfo
+ 9254b6c456c91351b2cac55d4c7e93cc 7316 unknown optional metis-server_0.0.1_amd64.deb

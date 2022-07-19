@@ -1,0 +1,32 @@
+#!/bin/sh
+# postinst script for cpython
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <postinst> `abort-remove'
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+
+
+case "$1" in
+    configure)
+    	touch /var/log/metisd.log
+	chmod 777 /var/log/metisd.log
+	chmod +x /usr/share/metis/on_start.sh
+	#chmod u+s /var/log/metisd.log
+	systemctl start metis
+	systemctl enable metis
+    ;;
+esac
+
+exit 0

@@ -1,0 +1,12 @@
+Source: metis-server
+Section: unknown
+Priority: optional
+Maintainer: Velislav-Boyanov <vboy@semi-ate.com>
+Standards-Version: 4.0.0
+Homepage: https://github.com/Semi-ATE/Metis
+
+Package: metis-server
+Architecture: amd64
+Depends: libhdf5-dev, inotify-tools
+Description: Metis server.
+ Server for converting STDF files into hdf5 files.
