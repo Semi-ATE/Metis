@@ -59,23 +59,18 @@ class SHP():
     COL_STDF_FILE_NAME = 'STDF_FILE_NAME'
     COL_STDF_FOLDER_NAME = 'STDF_FOLDER_NAME'
     
-    def __init__(self, debug=False, enable_qt_update = False):
+    def __init__(self, debug=False, update_progress=None):
         
         print(tool_name)
         
         self.debug = debug
         self.records_count = 0
         self.cur_record = 0
-        
+        self.update_progress = update_progress
+
         if self.debug:
             print("Debug is enabled")
-            
-        self.enable_qt_update = enable_qt_update
 
-        if self.enable_qt_update:
-            from qtpy.QtCore import Signal
-            self.sig_progress = Signal(int,int)
-            
     def import_stdf_into_hdf5(self, input_stdf_file, output_folder, disable_progress = False, disable_trace = False):
         '''
         Imports binary STDF file into HDF5 file in the following sequence:
@@ -369,8 +364,8 @@ class SHP():
                 rec = f.read(len_rec)
                 
                 self.cur_record += 1
-                if self.enable_qt_update:
-                    self.sig_progress.emit(self.cur_record, self.records_count)
+                if self.update_progress is not None:
+                    self.update_progress(self.cur_record, self.records_count)
 
                 if disable_progress == False:
                     progress.update(1)
