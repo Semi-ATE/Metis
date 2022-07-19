@@ -1,9 +1,0 @@
- dpkg-buildpackage -us -uc -ui -i -b
-dpkg-buildpackage: info: source package sct8-stil-loader
-dpkg-buildpackage: info: source version 0.0.1
-dpkg-buildpackage: info: source distribution stable
-dpkg-buildpackage: info: source changed by Velislav-Boyanov <vboy@semi-ate.com>
- dpkg-source -i --before-build .
-dpkg-buildpackage: info: host architecture amd64
-dpkg-source: error: source package has two conflicting values - metis-server and sct8-stil-loader
-dpkg-buildpackage: error: dpkg-source -i --before-build . subprocess returned exit status 25
