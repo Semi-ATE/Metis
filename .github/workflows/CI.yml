@@ -15,7 +15,7 @@ jobs:
       - name: Setup dependencies
         run: |
           sudo apt-get install -y libhdf5-dev inotify-tools libgirepository1.0-dev
-          mamba install -c conda-forge gst-plugins-base gst-python gstreamer
+          conda install -c conda-forge gst-plugins-base gst-python gstreamer
           pip install -r requirements/run.txt
           pip install -r requirements/test.txt
       - name: Run tests
