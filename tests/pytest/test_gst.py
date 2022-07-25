@@ -1,4 +1,5 @@
 import os
+os.environ['GST_PLUGIN_PATH'] = '../../Metis/'
 import gi
 import time
 import threading
@@ -8,11 +9,9 @@ import stat
 
 gi.require_version('Gst', '1.0')
 from gi.repository import Gst, GLib, GObject
-os.environ['GST_PLUGIN_PATH'] = '/home/nz/Metis/veli_fixed_5/pytest'
 
-org_file = "/home/nz/Metis/veli_fixed_5/pytest/test.std"
-org_file1 = "/home/nz/Metis/veli_fixed_5/pytest/test1.std"
-org_file2 = "/home/nz/Metis/veli_fixed_5/pytest/test2.std"
+org_file = "test.std"
+org_file1 = "test1.std"
 src_file = "/home/nz/Metis/veli_fixed_5/pytest/test.std.src"
 dst_file = "/tmp/test.std.dst"
     
@@ -142,7 +141,7 @@ def test_config_chmod():
                 out_file.write(ver)
                 out_file.close()
                 
-                os.chmod("config.yaml", 000)
+                os.chmod("../../Metis/metisd.yaml", 000)
                 thread.start()
                 
             else:
@@ -160,7 +159,7 @@ def test_config_chmod():
     #thread.join()            
     #res = os.path.exists(dst_file)
     res = filecmp.cmp(org_file1, dst_file, shallow=False)
-    os.chmod("config.yaml", stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO)
+    os.chmod("../../Metis/metisd.yaml", stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO)
     assert res == False
 
 def test_config_exist():
@@ -208,7 +207,7 @@ def test_config_exist():
                 out_file.write(ver)
                 out_file.close()
                 
-                os.rename('config.yaml','con.yaml')
+                os.rename('../../Metis/metisd.yaml','../../Metis/metison.yaml')
                 
                 thread.start()
             else:
@@ -226,7 +225,7 @@ def test_config_exist():
     #thread.join()            
     #res = os.path.exists(dst_file)
     res = filecmp.cmp(org_file1, dst_file, shallow=False)
-    os.rename('con.yaml','config.yaml')
+    os.rename('../../Metis/metison.yaml','../../Metis/metisd.yaml')
     assert res == False
                
 def test_negative_version():

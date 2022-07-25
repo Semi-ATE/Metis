@@ -17,11 +17,20 @@ Gst.init(None)
 
 def yaml_loader():
     """Loads yaml file"""
-    filepath = os.path.join(os.path.split(os.path.dirname(__file__))[0], "metisd.yaml")
-    #print(filepath)
-    with open("/etc/metisd.yaml", "r") as f:
-        data = safe_load(f)
-        return data
+    """Loads yaml file"""
+    if os.environ['TEST_METIS'] == "True":
+        filepath="../../Metis/metisd.yaml"
+    else:
+        filepath="/etc/metisd.yaml"  
+        
+    try:
+        with open("/etc/metisd.yaml", "r") as f:
+            data = safe_load(f)
+            return data
+    except Exception as e:
+        error = f'Could not open config file, {e}.'
+        sys.exit(error)
+        os._exit
 
 data = yaml_loader()
 
@@ -110,8 +119,8 @@ class metis_sink(GstBase.BaseSink):
 
                 my_data = info.data[0:flen+4].tobytes()
 
-                #self.file.write(my_data)                
-                #self.file.flush()
+                self.file.write(my_data)                
+                self.file.flush()
                 
                 if self.lot == "":    
                     self.queue += my_data

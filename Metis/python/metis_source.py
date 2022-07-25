@@ -17,11 +17,19 @@ Gst.init(None)
 
 def yaml_loader():
     """Loads yaml file"""
-    filepath = os.path.join(os.path.split(os.path.dirname(__file__))[0], "metisd.yaml")
-    #print(filepath)
-    with open("/etc/metisd.yaml", "r") as f:
-        data = safe_load(f)
-        return data
+    if os.environ['TEST_METIS'] == "True":
+        filepath="../../Metis/metisd.yaml"
+    else:
+        filepath="/etc/metisd.yaml"  
+
+    try:
+        with open(filepath, "r") as f:
+            data = safe_load(f)
+            return data
+    except Exception as e:
+        error = f'Could not open config file, {e}.'
+        sys.exit(error)
+        os._exit
 
 data = yaml_loader()
 
@@ -78,8 +86,15 @@ class metis_source(GstBase.BaseSrc):
 
         self.l = inotify.adapters.Inotify()
         
-        self.l.add_watch(self.in_file)
-        self.file = open(self.in_file, "rb")
+        try:
+            self.l.add_watch(self.in_file)
+            self.file = open(self.in_file, "rb")
+        except Exception as e:
+            error = f"file could not be opened, file:{self.in_file}, error: {e}."
+            print(error)
+            sys.exit(error)
+            os._exit
+        
         self.my_offset = os.path.getsize(self.in_file)
         self.file_offset = 0
         self.rec_id = 0
@@ -106,13 +121,26 @@ class metis_source(GstBase.BaseSrc):
             if bo == b'\x01':
                 self.byteorder = 'big'
             elif bo == b'\x02':
-                self.byteorder = 'little'	
-            else:
-                self.byteorder = sys.byteorder
+                self.byteorder = 'little'
+
+            try:
+                assert  self.byteorder == 'little' or self.byteorder == 'big'
+            except Exception as e:
+                error = f'Wrong byteorder, file:{self.in_file}, {e}.'
+                sys.exit(error)
+                os._exit
+
             ver = self.file.read(1)
             # check for version. if not 4 -> exit
             rec_len = int.from_bytes(b_len, self.byteorder)
             self.file_offset += 4
+                
+            try:
+                assert  ver == b'\x04'
+            except Exception as e:
+                error = f'Wrong file version, file:{self.in_file}, {e}.'
+                sys.exit(error)
+                os._exit
                 
             with buf.map(Gst.MapFlags.WRITE | Gst.MapFlags.READ) as info:
                 info.data[0] = b_len[0]
