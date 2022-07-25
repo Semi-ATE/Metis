@@ -1,5 +1,5 @@
 import os
-os.environ['GST_PLUGIN_PATH'] = '../../Metis/'
+os.environ['GST_PLUGIN_PATH'] = '/home/runner/work/Metis/Metis/'
 import gi
 import time
 import threading
@@ -10,10 +10,10 @@ import stat
 gi.require_version('Gst', '1.0')
 from gi.repository import Gst, GLib, GObject
 
-org_file = "test.std"
-org_file1 = "test1.std"
-src_file = "/home/nz/Metis/veli_fixed_5/pytest/test.std.src"
-dst_file = "/tmp/test.std.dst"
+org_file = "/home/runner/work/Metis/Metis/tests/pytest/test.std"
+org_file1 = "/home/runner/work/Metis/Metis/tests/pytest/test1.std"
+src_file = "/home/runner/work/Metis/Metis/tests/pytest/test.std.src"
+dst_file = "/home/runner/work/Metis/Metis/tests/pytest/test.std.dst"
     
 def gst_run():
 
