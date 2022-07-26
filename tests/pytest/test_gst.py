@@ -141,7 +141,7 @@ def test_config_chmod():
                 out_file.write(ver)
                 out_file.close()
                 
-                os.chmod("/home/runner/work/Metis/Metis/metisd.yaml", 000)
+                os.chmod("/home/runner/work/Metis/Metis/Metis/metisd.yaml", 000)
                 thread.start()
                 
             else:
@@ -159,7 +159,7 @@ def test_config_chmod():
     #thread.join()            
     #res = os.path.exists(dst_file)
     res = filecmp.cmp(org_file1, dst_file, shallow=False)
-    os.chmod("/home/runner/work/Metis/Metis/metisd.yaml", stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO)
+    os.chmod("/home/runner/work/Metis/Metis/Metis/metisd.yaml", stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO)
     assert res == False
 
 def test_config_exist():
@@ -207,7 +207,7 @@ def test_config_exist():
                 out_file.write(ver)
                 out_file.close()
                 
-                os.rename('/home/runner/work/Metis/Metis/metisd.yaml','/home/runner/work/Metis/Metis/metison.yaml')
+                os.rename('/home/runner/work/Metis/Metis/Metis/metisd.yaml','/home/runner/work/Metis/Metis/Metis/metison.yaml')
                 
                 thread.start()
             else:
@@ -225,7 +225,7 @@ def test_config_exist():
     #thread.join()            
     #res = os.path.exists(dst_file)
     res = filecmp.cmp(org_file1, dst_file, shallow=False)
-    os.rename('/home/runner/work/Metis/Metis/metison.yaml','/home/runner/work/Metis/Metis/metisd.yaml')
+    os.rename('/home/runner/work/Metis/Metis/Metis/metison.yaml','/home/runner/work/Metis/Metis/Metis/metisd.yaml')
     assert res == False
                
 def test_negative_version():
