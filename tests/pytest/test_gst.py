@@ -20,17 +20,17 @@ def gst_run():
     Gst.init(None)
 
     # create the elements
-    source = Gst.ElementFactory.make("test_source", "test_source")
+    source = Gst.ElementFactory.make("metis_source", "metis_source")
     if not source:
         print("ERROR: Can not find source plugin")
         sys.exit(1)
 
-    mid = Gst.ElementFactory.make("test_mid", "test_mid")
+    mid = Gst.ElementFactory.make("metis_process", "metis_process")
     if not mid:
         print("ERROR: Can not find mid plugin")
         sys.exit(1)
 
-    sink = Gst.ElementFactory.make("test_sink", "test_sink")
+    sink = Gst.ElementFactory.make("metis_sink", "metis_sink")
     if not sink:
         print("ERROR: Can not find sink plugin")
         sys.exit(1)
