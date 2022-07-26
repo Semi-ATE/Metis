@@ -18,7 +18,7 @@ jobs:
           conda install -c conda-forge gst-plugins-base gst-python gstreamer
           pip install -r requirements/run.txt
           pip install -r requirements/test.txt
-          export GST_PLUGIN_PATH=/home/runner/work/Metis/Metis/Metis/
+          export GST_PLUGIN_PATH=Metis/
       - name: Run tests
         run: pytest tests/ --cov=Metis
       - name: Create package
