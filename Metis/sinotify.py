@@ -14,7 +14,7 @@ import logging
 gi.require_version('Gst', '1.0')
 from gi.repository import Gst, GLib, GObject
 
-
+os.environ['TEST_METIS'] = "False"
                 
 def _main():
     here = os.path.realpath(__file__)
