@@ -1,5 +1,6 @@
 import os
 os.environ['GST_PLUGIN_PATH'] = '/home/runner/work/Metis/Metis/Metis'
+os.environ['TEST_METIS'] = "True"
 import gi
 import time
 import threading
