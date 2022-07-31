@@ -21,7 +21,9 @@ jobs:
           pwd
           ls -la
       - name: Run tests
-        run: pytest -s tests/ --cov=Metis
+        run: |
+          export GST_PLUGIN_PATH=$PWD\Metis
+          pytest -s tests/ --cov=Metis
       - name: Create package
         run: python setup.py sdist
       - name: Check package
