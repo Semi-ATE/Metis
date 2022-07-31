@@ -14,7 +14,7 @@ gi.require_version('GstBase', '1.0')
 
 from gi.repository import Gst, GObject, GstBase
 Gst.init(None)                        
-
+'''
 def yaml_loader():
     """Loads yaml file"""
     if os.environ['TEST_METIS'] == "True":
@@ -38,7 +38,7 @@ if data['metis']['log']['logging'] == True:
     loglevel = data['metis']['log']['log-level']
     numeric_level = getattr(logging, loglevel.upper(), None)
     logging.basicConfig(filename=data['metis']['log']['log-path'], filemode='a', level=numeric_level)
-
+'''
 class metis_source(GstBase.BaseSrc):
     __gstmetadata__ = ("Source data",
                        "Transform",
@@ -57,6 +57,7 @@ class metis_source(GstBase.BaseSrc):
                                      GObject.ParamFlags.READWRITE)}
     ############################################################################# 
     def __init__(self):
+        print("Source has started.")
         GstBase.BaseSrc.__init__(self)
         self.set_live(True)
         self.tested = False
@@ -68,6 +69,7 @@ class metis_source(GstBase.BaseSrc):
         self.file_offset = 0
         self.in_file = "test.std"
         self.lot = ""
+        print("Source init has ended.")
     #############################################################################     
     def do_get_property(self, prop):
         if prop.name == 'file-name':
@@ -83,7 +85,7 @@ class metis_source(GstBase.BaseSrc):
     ############################################################################# 
     def do_start (self):
         print(f"Metis source plugin started")
-
+        '''
         self.l = inotify.adapters.Inotify()
         
         try:
@@ -102,13 +104,13 @@ class metis_source(GstBase.BaseSrc):
         self.lot = None
         #print(f"Test source started {self.file}")
         logging.info(f'Source started, file:{self.in_file} ,time:{datetime.now()}.')
+        '''
         return True
         
     def set_pipeline(self, pipeline):
         self.pipeline = pipeline
 
     def process_record(self, buf):
-        
         b_len = self.file.read(2)
         b_type = self.file.read(1)
         b_sub = self.file.read(1)
@@ -122,26 +124,26 @@ class metis_source(GstBase.BaseSrc):
                 self.byteorder = 'big'
             elif bo == b'\x02':
                 self.byteorder = 'little'
-
+            '''
             try:
-                assert  self.byteorder == 'little' or self.byteorder == 'big'
+                assert self.byteorder == 'little' or self.byteorder == 'big'
             except Exception as e:
                 error = f'Wrong byteorder, file:{self.in_file}, {e}.'
                 sys.exit(error)
                 os._exit
-
+            '''
             ver = self.file.read(1)
             # check for version. if not 4 -> exit
             rec_len = int.from_bytes(b_len, self.byteorder)
             self.file_offset += 4
-                
+            '''    
             try:
                 assert  ver == b'\x04'
             except Exception as e:
                 error = f'Wrong file version, file:{self.in_file}, {e}.'
                 sys.exit(error)
                 os._exit
-                
+            '''    
             with buf.map(Gst.MapFlags.WRITE | Gst.MapFlags.READ) as info:
                 info.data[0] = b_len[0]
                 info.data[1] = b_len[1]
@@ -177,11 +179,11 @@ class metis_source(GstBase.BaseSrc):
                                 
         if self.lot != None:
             self.rec_id += 1
-
         return type, sub
         
     ############################################################################# 
     def do_fill(self, offset, length, buf):
+        '''
         self.queue = buf
         buf.memset(0, 0, self.max_needed_buffer_size)
         
@@ -231,7 +233,7 @@ class metis_source(GstBase.BaseSrc):
                     
                     if is_lot_found:
                         return (Gst.FlowReturn.OK, buf)
-            
+        '''    
         return (Gst.FlowReturn.OK, buf)
             
 GObject.type_register(metis_source)

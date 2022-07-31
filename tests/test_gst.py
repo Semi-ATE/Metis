@@ -1,5 +1,8 @@
 import os
-os.environ['GST_PLUGIN_PATH'] = '/home/runner/work/Metis/Metis/Metis'
+test_loc = os.path.dirname(__file__)
+root_loc = os.path.join(test_loc, "..")
+os.environ['GST_PLUGIN_PATH'] = os.path.join(root_loc, "Metis")
+print(os.environ['GST_PLUGIN_PATH'])
 os.environ['TEST_METIS'] = "True"
 import gi
 import time
@@ -11,10 +14,11 @@ import stat
 gi.require_version('Gst', '1.0')
 from gi.repository import Gst, GLib, GObject
 
-org_file = "/home/runner/work/Metis/Metis/tests/pytest/test.std"
-org_file1 = "/home/runner/work/Metis/Metis/tests/pytest/test1.std"
-src_file = "/home/runner/work/Metis/Metis/tests/pytest/test.std.src"
-dst_file = "/home/runner/work/Metis/Metis/tests/pytest/test.std.dst"
+org_file = "test.std"
+src_file = "test.std.src"
+dst_file = "test.std.dst"
+yaml_file = os.path.join(root_loc, "Metis/metisd.yaml")
+wrong_yaml_file = os.path.join(root_loc, "Metis/nometisd.yaml")
     
 def gst_run():
 
@@ -94,8 +98,6 @@ def gst_run():
 
     print(f"End of transfering {src_file}")
     pipeline.set_state(Gst.State.NULL)
-#    res = filecmp.cmp(org_file, dst_file, shallow=False)
-#    assert res == False
 
 def test_config_chmod():
     
@@ -110,7 +112,7 @@ def test_config_chmod():
     byteorder = None
     record_counter = 0
 
-    with open(org_file1, "rb") as in_file:
+    with open(org_file, "rb") as in_file:
          while(True):
             out_file = open(src_file, "ab")
             # Get record length
@@ -142,8 +144,12 @@ def test_config_chmod():
                 out_file.write(ver)
                 out_file.close()
                 
-                os.chmod("/home/runner/work/Metis/Metis/Metis/metisd.yaml", 000)
-                thread.start()
+                os.chmod(yaml_file, 000)
+                try:
+                    thread.start()
+                except:
+                    os.chmod(yaml_file, 644)
+                        
                 
             else:
                 len_rec = int.from_bytes(rec_len, byteorder)
@@ -158,9 +164,8 @@ def test_config_chmod():
     
             
     #thread.join()            
-    #res = os.path.exists(dst_file)
-    res = filecmp.cmp(org_file1, dst_file, shallow=False)
-    os.chmod("/home/runner/work/Metis/Metis/Metis/metisd.yaml", stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO)
+    res = os.path.exists(dst_file)
+    os.chmod(yaml_file, 644)
     assert res == False
 
 def test_config_exist():
@@ -176,7 +181,7 @@ def test_config_exist():
     byteorder = None
     record_counter = 0
 
-    with open(org_file1, "rb") as in_file:
+    with open(org_file, "rb") as in_file:
          while(True):
             out_file = open(src_file, "ab")
             # Get record length
@@ -208,9 +213,12 @@ def test_config_exist():
                 out_file.write(ver)
                 out_file.close()
                 
-                os.rename('/home/runner/work/Metis/Metis/Metis/metisd.yaml','/home/runner/work/Metis/Metis/Metis/metison.yaml')
-                
-                thread.start()
+                os.rename(yaml_file, wrong_yaml_file)
+                try:
+                    thread.start()
+                except:
+                    os.rename(wrong_yaml_file, yaml_file)
+                    
             else:
                 len_rec = int.from_bytes(rec_len, byteorder)
                 # Get rest of the record
@@ -223,10 +231,9 @@ def test_config_exist():
                 out_file.close()
     
             
-    #thread.join()            
-    #res = os.path.exists(dst_file)
-    res = filecmp.cmp(org_file1, dst_file, shallow=False)
-    os.rename('/home/runner/work/Metis/Metis/Metis/metison.yaml','/home/runner/work/Metis/Metis/Metis/metisd.yaml')
+    res = os.path.exists(dst_file)
+    if os.path.exists(wrong_yaml_file):
+        os.rename(wrong_yaml_file,yaml_file)
     assert res == False
                
 def test_negative_version():
@@ -242,7 +249,7 @@ def test_negative_version():
     byteorder = None
     record_counter = 0
     
-    with open(org_file1, "rb") as in_file:
+    with open(org_file, "rb") as in_file:
          while(True):
             out_file = open(src_file, "ab")
             # Get record length
@@ -287,10 +294,7 @@ def test_negative_version():
                 out_file.write(rec)
                 out_file.close()
 
-    #thread.join()
-    
-    #res = os.path.exists(dst_file)
-    res = filecmp.cmp(org_file1, dst_file, shallow=False)
+    res = os.path.exists(dst_file)
     assert res == False
 
 
@@ -307,7 +311,7 @@ def test_negative_byteorder():
     byteorder = None
     record_counter = 0
     
-    with open(org_file1, "rb") as in_file:
+    with open(org_file, "rb") as in_file:
          while(True):
             out_file = open(src_file, "ab")
             # Get record length
@@ -353,10 +357,7 @@ def test_negative_byteorder():
                 out_file.write(rec)
                 out_file.close()
 
-    #thread.join()
-    
-    #res = os.path.exists(dst_file)
-    res = filecmp.cmp(org_file1, dst_file, shallow=False)
+    res = os.path.exists(dst_file)
     assert res == False
 
 
@@ -373,7 +374,7 @@ def test_negative_exist():
     byteorder = None
     record_counter = 0
     
-    with open(org_file1, "rb") as in_file:
+    with open(org_file, "rb") as in_file:
          while(True):
             out_file = open(src_file, "ab")
             # Get record length
@@ -411,9 +412,7 @@ def test_negative_exist():
     
                 break;
                 
-    #thread.join()
     res = os.path.exists(dst_file)
-    #res = filecmp.cmp(org_file, dst_file, shallow=False)
     assert res == False
 
 def test_negative_chmod():
@@ -429,7 +428,7 @@ def test_negative_chmod():
     byteorder = None
     record_counter = 0
     
-    with open(org_file1, "rb") as in_file:
+    with open(org_file, "rb") as in_file:
          while(True):
             out_file = open(src_file, "ab")
             # Get record length
@@ -466,9 +465,7 @@ def test_negative_chmod():
                 thread.start()
                 break;
                 
-    #thread.join()
     res = os.path.exists(dst_file)
-    #res = filecmp.cmp(org_file, dst_file, shallow=False)
     assert res == False
 
     
@@ -485,7 +482,7 @@ def test_gst():
     byteorder = None
     record_counter = 0
 
-    with open(org_file1, "rb") as in_file:
+    with open(org_file, "rb") as in_file:
          while(True):
             out_file = open(src_file, "ab")
             # Get record length
@@ -537,7 +534,7 @@ def test_gst():
 #            print(f"record number {record_counter} length {len_rec} type {rec_type} subtype  {rec_subtype} {byteorder}")
             
     thread.join()
-    res = filecmp.cmp(org_file1, dst_file, shallow=False)
+    res = filecmp.cmp(org_file, dst_file, shallow=False)
     assert res == True
     
     
