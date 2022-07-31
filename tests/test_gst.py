@@ -14,9 +14,9 @@ import stat
 gi.require_version('Gst', '1.0')
 from gi.repository import Gst, GLib, GObject
 
-org_file = "test.std"
-src_file = "test.std.src"
-dst_file = "test.std.dst"
+org_file = os.path.join(test_loc, "test.std")
+src_file = os.path.join(test_loc,  "test.std.src")
+dst_file = os.path.join(test_loc, "test.std.dst")
 yaml_file = os.path.join(root_loc, "Metis/metisd.yaml")
 wrong_yaml_file = os.path.join(root_loc, "Metis/nometisd.yaml")
     
