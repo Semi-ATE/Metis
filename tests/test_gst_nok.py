@@ -172,6 +172,9 @@ def test_config_not_exist():
         os.rename(wrong_yaml_file,yaml_file)
     assert res == False
 
+    if os.path.exists(src_file1):
+        os.remove(src_file1)
+
 def test_negative_byteorder():
     
     if os.path.exists(src_file2):
@@ -233,6 +236,9 @@ def test_negative_byteorder():
     res = os.path.exists(dst_file)
     assert res == False
 
+    if os.path.exists(src_file2):
+        os.remove(src_file2)
+
     
 def test_negative_exist():
     
@@ -286,6 +292,9 @@ def test_negative_exist():
                 
     res = os.path.exists(dst_file)
     assert res == False
+
+    if os.path.exists(src_file3):
+        os.remove(src_file3)
 
 def test_negative_version():
     
@@ -346,3 +355,5 @@ def test_negative_version():
 
     res = os.path.exists(dst_file)
     assert res == False
+    if os.path.exists(src_file4):
+        os.remove(src_file4)

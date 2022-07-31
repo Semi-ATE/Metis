@@ -162,3 +162,5 @@ def test_gst_pass():
     res = filecmp.cmp(org_file, dst_file, shallow=False)
     assert res == True
     
+    if os.path.exists(src_file3):
+        os.remove(src_file3)

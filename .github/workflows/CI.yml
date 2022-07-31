@@ -24,7 +24,6 @@ jobs:
         run: |
           export GST_PLUGIN_PATH=$PWD/Metis
           echo $GST_PLUGIN_PATH
-          ls -la ~/.cache/gstreamer-1.0/
           pytest -s tests/ --cov=Metis
       - name: Create package
         run: python setup.py sdist
