@@ -8,6 +8,17 @@ import logging
 import numpy as np
 from yaml import safe_load, dump 
 from datetime import datetime
+
+try:
+    from .MetisConfig import MetisConfig
+except:
+    cwd = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    sys.path.insert(0, cwd)
+    from MetisConfig import MetisConfig
+    
+file_loc = os.path.dirname(__file__)
+test_loc = os.path.join(file_loc, "../metisd.yaml")
+
 gi.require_version("Gst", "1.0")
 gi.require_version('GstBase', '1.0')
 
@@ -15,31 +26,9 @@ from os import path
 from gi.repository import Gst, GObject, GstBase
 Gst.init(None)
 
-def yaml_loader():
-    """Loads yaml file"""
-    """Loads yaml file"""
-    if os.environ['TEST_METIS'] == "True":
-        filepath="../../Metis/metisd.yaml"
-    else:
-        filepath="/etc/metisd.yaml"  
         
-    try:
-        with open("/etc/metisd.yaml", "r") as f:
-            data = safe_load(f)
-            return data
-    except Exception as e:
-        error = f'Could not open config file, {e}.'
-        sys.exit(error)
-        os._exit
 
-data = yaml_loader()
-
-if data['metis']['log']['logging'] == True:
-    loglevel = data['metis']['log']['log-level']
-    numeric_level = getattr(logging, loglevel.upper(), None)
-    logging.basicConfig(filename=data['metis']['log']['log-path'], filemode='a', level=numeric_level)
-
-class metis_sink(GstBase.BaseSink):
+class metis_sink(GstBase.BaseSink, MetisConfig):
     __gstmetadata__ = ("Sink data",
                        "Transform",
                        "Writes stdf files into hdf5 file",
@@ -68,16 +57,46 @@ class metis_sink(GstBase.BaseSink):
         self.time1 = time.time()
         self.time2 = time.time()
         self.queue = bytearray()
+        self.file = None
+        
+        MetisConfig.__init__(self)
+        
+#        self.config = self.load_config()
 
+#        if self.config['metis']['log']['logging'] == True:
+#            loglevel = self.config['metis']['log']['log-level']
+#            numeric_level = getattr(logging, loglevel.upper(), None)
+#            log_path = self.config['metis']['log']['log-path']
+#            logging.basicConfig(filename=log_path, filemode='a', level=numeric_level)
+
+#    def load_config(self):
+#        """Loads yaml file"""
+#        try:
+#            with open("/etc/metisd.yaml", "r") as f:
+#                config_data = safe_load(f)
+#                return config_data
+#        except Exception as e:
+#            try:
+#                with open(test_loc, "r") as f:
+#                    config_data = safe_load(f)
+#                    return config_data
+#            except Exception as e:
+#                error = f'Could not open config file, {e}.'
+#                sys.exit(error)
+#            os._exit
+#
     def do_start(self):
-        print("Metis sink plugin started")
-        if os.path.exists(self.filename):
-            os.remove(self.filename)
-        self.file = open(self.filename, "ba")
-        self.file_read = open(self.filename, "rb")
         logging.info(f'Sink started, file:{self.filename} ,time:{datetime.now()}.')
-        #print("Test sink started")
         return True
+#        try:
+#            print(f"opening file {self.filename}")
+#            self.file_read = open(self.filename, "rb")
+#            print("Metis sink plugin started")
+#        except Exception as e: 
+#            print(e)
+#            logging.info(f'Sink can not start file:{self.filename} can not be open in rb mode ,time:{datetime.now()}.')
+#            print("Metis sink plugin failed to start")
+#            return False
 
     def do_get_property(self, prop):
          if prop.name == 'file-name':
@@ -95,6 +114,10 @@ class metis_sink(GstBase.BaseSink):
              
     
     def do_render(self, buffer):
+        
+        if self.file == None:
+            self.file = open(self.filename, "ba")
+    
         try:
              with buffer.map(Gst.MapFlags.READ) as info: 
                 
@@ -136,8 +159,7 @@ class metis_sink(GstBase.BaseSink):
                 
                 
                 if self.lot != "":
-                    data = yaml_loader()
-                    path_yam = data['metis']['paths']['write-path'] 
+                    path_yam = self.config['metis']['paths']['write-path'] 
                     hdf_path = path_yam + self.lot + '.h5'
                     
                     count = flen+4
