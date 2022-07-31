@@ -25,9 +25,6 @@ jobs:
         run: |
           export GST_PLUGIN_PATH=$PWD/Metis
           echo $GST_PLUGIN_PATH
-          echo "gst-inspect-1.0 :"
-          gst-inspect-1.0 | grep metis
-          echo "================"
           pytest -s tests/ --cov=Metis
       - name: Create package
         run: python setup.py sdist
