@@ -21,6 +21,7 @@ jobs:
           pwd
           ls -la
       - name: Run tests
+        shell: bash
         run: |
           export GST_PLUGIN_PATH=$PWD/Metis
           echo $GST_PLUGIN_PATH
