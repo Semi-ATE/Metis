@@ -2,7 +2,7 @@ import os
 test_loc = os.path.dirname(__file__)
 root_loc = os.path.join(test_loc, "..")
 os.environ['GST_PLUGIN_PATH'] = os.path.join(root_loc, "Metis")
-print(os.environ['GST_PLUGIN_PATH'])
+print(f"======={os.environ['GST_PLUGIN_PATH']}")
 os.environ['TEST_METIS'] = "True"
 import gi
 import time

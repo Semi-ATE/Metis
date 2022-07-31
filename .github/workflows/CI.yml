@@ -21,7 +21,7 @@ jobs:
           pwd
           ls -la
       - name: Run tests
-        run: pytest tests/ --cov=Metis
+        run: pytest -s tests/ --cov=Metis
       - name: Create package
         run: python setup.py sdist
       - name: Check package
