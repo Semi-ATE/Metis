@@ -158,7 +158,12 @@ def test_gst_pass():
                 out_file.write(rec_subtype)
                 out_file.write(rec)
                 out_file.close()
-
+   
+    thread.join()            
+    print("org:")            
+    print(os.path.getsize(org_file))
+    print("dst:")            
+    print(os.path.getsize(dst_file))            
     res = filecmp.cmp(org_file, dst_file, shallow=False)
     assert res == True
     
