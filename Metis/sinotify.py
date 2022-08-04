@@ -37,14 +37,13 @@ def _main():
     Gst.debug_set_active(True)
     Gst.debug_set_default_threshold(3)    
     
-    i = inotify.adapters.Inotify()
+    i = inotify.adapters.InotifyTree(here)
     watch_list = []
     sink_list = []
     threads = []
 
     path = data['metis']['paths']['main-daemon-path']
     write_path = data['metis']['paths']['write-path']
-    i.add_watch(path)
     files = os.listdir(path)
     
     #add already existing files to watch list
