@@ -22,10 +22,8 @@ jobs:
           ls -la
       - name: Run tests
         shell: bash
-        run: |
-          export GST_PLUGIN_PATH=$PWD/Metis
-          echo $GST_PLUGIN_PATH
-          pytest -s tests/ --cov=Metis
+        run: 
+          bash scripttest.sh
       - name: Create package
         run: python setup.py sdist
       - name: Check package
