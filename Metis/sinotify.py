@@ -37,7 +37,6 @@ def _main():
     Gst.debug_set_active(True)
     Gst.debug_set_default_threshold(3)    
     
-    i = inotify.adapters.InotifyTree(here)
     watch_list = []
     sink_list = []
     threads = []
@@ -45,7 +44,7 @@ def _main():
     path = data['metis']['paths']['main-daemon-path']
     write_path = data['metis']['paths']['write-path']
     files = os.listdir(path)
-    
+    i = inotify.adapters.InotifyTree(path) 
     #add already existing files to watch list
 
     for event in i.event_gen(yield_nones=False):
