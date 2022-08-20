@@ -32,8 +32,8 @@ wrong_yaml_file = os.path.join(test_loc, "nometisd.yaml")
 def test_config_not_exist():
     
     Gst.init(None)
-  #  Gst.debug_set_active(True)
-  #  Gst.debug_set_default_threshold(3)
+    Gst.debug_set_active(True)
+    Gst.debug_set_default_threshold(3)
 
     if os.path.exists(src_file1):
         os.remove(src_file1)
@@ -107,8 +107,8 @@ def test_config_not_exist():
 def test_negative_byteorder():
 
     Gst.init(None)
- #   Gst.debug_set_active(True)
- #   Gst.debug_set_default_threshold(3)
+    Gst.debug_set_active(True)
+    Gst.debug_set_default_threshold(3)
     
     if os.path.exists(src_file2):
         os.remove(src_file2)
@@ -176,8 +176,8 @@ def test_negative_byteorder():
 def test_negative_exist():
 
     Gst.init(None)
-#    Gst.debug_set_active(True)
-#    Gst.debug_set_default_threshold(3)
+    Gst.debug_set_active(True)
+    Gst.debug_set_default_threshold(3)
     
     if os.path.exists(src_file3):
         os.remove(src_file3)
@@ -236,8 +236,8 @@ def test_negative_exist():
 def test_negative_version():
 
     Gst.init(None)
-#    Gst.debug_set_active(True)
-#    Gst.debug_set_default_threshold(3)
+    Gst.debug_set_active(True)
+    Gst.debug_set_default_threshold(3)
     
     if os.path.exists(src_file4):
         os.remove(src_file4)
