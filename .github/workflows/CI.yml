@@ -29,15 +29,16 @@ jobs:
           pip list
           dpkg -l | grep gst
           ls -la ~/.cache
-          gst-inspect-1.0 > test
-          ls -la ~/.cache
+          gst-inspect-1.0 > gst_plugins_list
+          ls -la ~/.cache/gstreamer-1.0/
+          cat gst_plugins_list
       - name: Run tests
         shell: bash
         run: |
           echo "========= GST_PLUGIN_PATH ==========="
           echo $GST_PLUGIN_PATH
           echo "====================================="
-          pytest
+          pytest -s
 #          bash scripttest.sh
       - name: Create package
         run: python setup.py sdist
