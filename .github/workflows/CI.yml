@@ -20,7 +20,6 @@ jobs:
           pip install -r requirements/test.txt
           pwd
           ls -la
-          ls -la ~/.cache/gstreamer-1.0/
       - name: Run tests
         shell: bash
         run: 
