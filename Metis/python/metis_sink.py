@@ -21,9 +21,7 @@ gi.require_version("Gst", "1.0")
 gi.require_version('GstBase', '1.0')
 
 from gi.repository import Gst, GObject, GstBase
-Gst.init(None)
-
-        
+Gst.init(None)        
 
 class metis_sink(GstBase.BaseSink, MetisConfig):
     __gstmetadata__ = ("Sink data",
