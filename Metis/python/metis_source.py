@@ -5,7 +5,6 @@ import inotify.adapters
 import os
 import logging
 import numpy as np
-from yaml import safe_load, dump 
 from datetime import datetime
 
 try:
@@ -16,7 +15,6 @@ except:
     from MetisConfig import MetisConfig
     
 file_loc = os.path.dirname(__file__)
-test_loc = os.path.join(file_loc, "../metisd.yaml")
 
 gi.require_version("Gst", "1.0")
 gi.require_version('GstBase', '1.0')

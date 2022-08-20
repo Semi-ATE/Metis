@@ -8,5 +8,4 @@ metis:
     log:    
         logging: 1 # 0=>logging off, 1=>logging on
         log-path: "/tmp/metisd.log"
-        log-level: "INFO" # "INFO" "WARNING" "ERROR" "DEBUG" "CRITICAL" "NOTSET"   
-    
+        log-level: "INFO" # "INFO" "WARNING" "ERROR" "DEBUG" "CRITICAL" "NOTSET"

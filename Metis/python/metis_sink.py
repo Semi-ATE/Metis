@@ -6,7 +6,6 @@ import h5py
 import time
 import logging
 import numpy as np
-from yaml import safe_load, dump 
 from datetime import datetime
 
 try:
@@ -17,7 +16,6 @@ except:
     from MetisConfig import MetisConfig
     
 file_loc = os.path.dirname(__file__)
-test_loc = os.path.join(file_loc, "../metisd.yaml")
 
 gi.require_version("Gst", "1.0")
 gi.require_version('GstBase', '1.0')
@@ -61,42 +59,9 @@ class metis_sink(GstBase.BaseSink, MetisConfig):
         
         MetisConfig.__init__(self)
         
-#        self.config = self.load_config()
-
-#        if self.config['metis']['log']['logging'] == True:
-#            loglevel = self.config['metis']['log']['log-level']
-#            numeric_level = getattr(logging, loglevel.upper(), None)
-#            log_path = self.config['metis']['log']['log-path']
-#            logging.basicConfig(filename=log_path, filemode='a', level=numeric_level)
-
-#    def load_config(self):
-#        """Loads yaml file"""
-#        try:
-#            with open("/etc/metisd.yaml", "r") as f:
-#                config_data = safe_load(f)
-#                return config_data
-#        except Exception as e:
-#            try:
-#                with open(test_loc, "r") as f:
-#                    config_data = safe_load(f)
-#                    return config_data
-#            except Exception as e:
-#                error = f'Could not open config file, {e}.'
-#                sys.exit(error)
-#            os._exit
-#
     def do_start(self):
         logging.info(f'Sink started, file:{self.filename} ,time:{datetime.now()}.')
         return True
-#        try:
-#            print(f"opening file {self.filename}")
-#            self.file_read = open(self.filename, "rb")
-#            print("Metis sink plugin started")
-#        except Exception as e: 
-#            print(e)
-#            logging.info(f'Sink can not start file:{self.filename} can not be open in rb mode ,time:{datetime.now()}.')
-#            print("Metis sink plugin failed to start")
-#            return False
 
     def do_get_property(self, prop):
          if prop.name == 'file-name':

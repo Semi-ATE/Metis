@@ -6,7 +6,7 @@ from yaml import safe_load, dump
 from datetime import datetime
 
 file_loc = os.path.dirname(__file__)
-test_loc = os.path.join(file_loc, "../test_metisd.yaml")
+test_loc = os.path.join(file_loc, "../../tests/test_metisd.yaml")
 
 class MetisConfig():
 

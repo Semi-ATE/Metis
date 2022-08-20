@@ -14,8 +14,6 @@ import logging
 gi.require_version('Gst', '1.0')
 from gi.repository import Gst, GLib, GObject
 
-os.environ['TEST_METIS'] = "False"
-                
 def _main():
     here = os.path.realpath(__file__)
     
@@ -23,12 +21,12 @@ def _main():
     
     os.environ['GST_PLUGIN_PATH'] = here 
 
-    data = yaml_loader()
+    conf_data = yaml_loader("/etc/metisd.yaml")
     
-    if data['metis']['log']['logging'] == True:
-        loglevel = data['metis']['log']['log-level']
+    if conf_data['metis']['log']['logging'] == True:
+        loglevel = conf_data['metis']['log']['log-level']
         numeric_level = getattr(logging, loglevel.upper(), None)
-        logging.basicConfig(filename=data['metis']['log']['log-path'], filemode='a', level=numeric_level)
+        logging.basicConfig(filename = conf_data['metis']['log']['log-path'], filemode='a', level=numeric_level)
     
     
     logging.info(f'Stdf-inotify has started, time:{datetime.now()}.')
@@ -41,8 +39,8 @@ def _main():
     sink_list = []
     threads = []
 
-    path = data['metis']['paths']['main-daemon-path']
-    write_path = data['metis']['paths']['write-path']
+    path = conf_data['metis']['paths']['main-daemon-path']
+    write_path = conf_data['metis']['paths']['write-path']
     files = os.listdir(path)
     i = inotify.adapters.InotifyTree(path) 
     #add already existing files to watch list
@@ -73,27 +71,25 @@ def _main():
             if not os.path.isdir(file_path):
                 watch_list.append(filename)
                 
-                #start_stream(file_path, out_sink)
-                
-                
-                th = threading.Thread(target=start_stream, args=(file_path, out_sink))
+                th = threading.Thread(target=start_stream, args=(file_path, out_sink, None))
                 th.daemon = True # Thread dies when main thread (only non-daemon thread) exits.
 
                 th.start()
                 
                 logging.info(f'Started thread,  file:{file_path}, time:{datetime.now()}.')
         
-#starts gstream  
-def start_stream(src_file, out_sink):
-    data = yaml_loader()
+#starts gstreamer  
+def start_stream(src_file, out_sink, conf_file):
     
-    if data['metis']['log']['logging'] == True:
-        loglevel = data['metis']['log']['log-level']
+    print(f"start stream conf {conf_file}")
+    conf_data = yaml_loader(conf_file)
+    
+    if conf_data['metis']['log']['logging'] == True:
+        loglevel = conf_data['metis']['log']['log-level']
         numeric_level = getattr(logging, loglevel.upper(), None)
-        logging.basicConfig(filename=data['metis']['log']['log-path'], filemode='a', level=numeric_level)
+        logging.basicConfig(filename = conf_data['metis']['log']['log-path'], filemode='a', level=numeric_level)
         
     # initialize GStreamer
-    # print(os.getcwd())
     # create the elements
     source = Gst.ElementFactory.make("metis_source", "metis_source")
     if not source:
@@ -146,23 +142,14 @@ def start_stream(src_file, out_sink):
         logging.error(f'Unable to set the pipeline to playing state,  file:{src_file}, time:{datetime.now()}.')
         #print("ERROR: Unable to set the pipeline to the playing state")
 
-    if not (ret == Gst.StateChangeReturn.FAILURE):
-        pipeline.set_state(Gst.State.NULL)
-        return "Pipeline state set to running"
-        
-
     # wait for EOS or error
     bus = pipeline.get_bus()
-#    bus.connect("message", bus_message_handler)
     while True:
         msg = bus.timed_pop_filtered(
             Gst.CLOCK_TIME_NONE,
             Gst.MessageType.STATE_CHANGED | Gst.MessageType.ERROR | Gst.MessageType.EOS
             )
     
-        
-        #time.sleep(2)
-
         if msg:
             t = msg.type
             if t == Gst.MessageType.ERROR:
@@ -186,10 +173,11 @@ def start_stream(src_file, out_sink):
     pipeline.set_state(Gst.State.NULL)
 
 
-def yaml_loader():
+def yaml_loader(conf_file):
     """Loads yaml file"""
-    filepath = "/etc/metisd.yaml"
-    with open(filepath, "r") as f:
+    if conf_file == None:
+        conf_file = "/etc/metisd.yaml"
+    with open(conf_file, "r") as f:
         data = safe_load(f)
         return data
 
