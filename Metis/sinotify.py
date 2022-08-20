@@ -81,9 +81,9 @@ def _main():
 #starts gstreamer  
 def start_stream(src_file, out_sink, conf_file):
 
-    Gst.init(None)
-    Gst.debug_set_active(True)
-    Gst.debug_set_default_threshold(5)        
+#    Gst.init(None)
+#    Gst.debug_set_active(True)
+#    Gst.debug_set_default_threshold(5)        
 
     print(f"start stream conf {conf_file}")
     conf_data = yaml_loader(conf_file)

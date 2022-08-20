@@ -34,7 +34,7 @@ jobs:
           echo "========= GST_PLUGIN_PATH ==========="
           echo $GST_PLUGIN_PATH
           echo "====================================="
-          pytest -s
+          pytest
 #          bash scripttest.sh
       - name: Create package
         run: python setup.py sdist

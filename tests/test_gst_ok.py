@@ -28,8 +28,8 @@ yaml_file = os.path.join(test_loc, "test_metisd.yaml")
 def test_gst_pass():
 
     Gst.init(None)
-    Gst.debug_set_active(True)
-    Gst.debug_set_default_threshold(3)
+#    Gst.debug_set_active(True)
+#    Gst.debug_set_default_threshold(3)
 
     if os.path.exists(src_file):
         os.remove(src_file)
