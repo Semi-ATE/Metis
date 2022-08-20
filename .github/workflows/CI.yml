@@ -34,13 +34,13 @@ jobs:
           ls -la /home/runner/work/Metis/Metis/Metis
           echo "========= GST_PLUGIN_PATH ==========="
           echo $GST_PLUGIN_PATH
-          echo "====================================="
+          echo "========= PWD folder ==========="
+          echo $PWD
           gst-inspect-1.0 > gst_plugins_list
           echo "========= home cache folder   ==========="
           ls -la ~/.cache/gstreamer-1.0/
           echo "========= gst plugin list     ==========="
           cat gst_plugins_list
-          GST_PLUGIN_PATH=$GST_PLUGIN_PATH gst-inspect-1.0 metis_source
           
       - name: Run tests
         shell: bash
