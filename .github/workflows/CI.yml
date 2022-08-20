@@ -23,6 +23,8 @@ jobs:
           pip install -r requirements/test.txt
           pwd
           ls -la
+          conda list 
+          dpkg -l | grep gst
       - name: Run tests
         shell: bash
         run: |
