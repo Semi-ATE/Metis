@@ -13,3 +13,4 @@ gobject
 PyGObject
 inotify
 pyaml
+h5py==3.7.0
