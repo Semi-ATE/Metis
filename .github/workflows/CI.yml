@@ -28,7 +28,7 @@ jobs:
           conda list 
           pip list
           dpkg -l | grep gst
-          ls -la ~/
+          ls -la ~/.cache
       - name: Run tests
         shell: bash
         run: |
