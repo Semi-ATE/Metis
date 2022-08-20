@@ -26,6 +26,7 @@ jobs:
           pwd
           ls -la
           conda list 
+          pip list
           dpkg -l | grep gst
       - name: Run tests
         shell: bash
