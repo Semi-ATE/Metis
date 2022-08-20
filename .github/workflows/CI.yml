@@ -26,6 +26,9 @@ jobs:
           echo "====================================="
           echo " GST_PLUGIN_PATH = " $GST_PLUGIN_PATH
           bash scripttest.sh
+          export GST_PLUGIN_PATH=/home/runner/work/Metis/Metis/Metis
+          echo "====================================="
+          echo " GST_PLUGIN_PATH = " $GST_PLUGIN_PATH
           pytest -s
       - name: Create package
         run: python setup.py sdist
