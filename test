@@ -1,0 +1,293 @@
+adder:  adder: Adder
+alsa:  alsadeviceprovider (GstDeviceProviderFactory)
+alsa:  alsamidisrc: AlsaMidi Source
+alsa:  alsasink: Audio sink (ALSA)
+alsa:  alsasrc: Audio source (ALSA)
+app:  appsink: AppSink
+app:  appsrc: AppSrc
+audioconvert:  audioconvert: Audio converter
+audiomixer:  audiointerleave: AudioInterleave
+audiomixer:  audiomixer: AudioMixer
+audiomixer:  liveadder: AudioMixer
+audiorate:  audiorate: Audio rate adjuster
+audioresample:  audioresample: Audio resampler
+audiotestsrc:  audiotestsrc: Audio test source
+compositor:  compositor: Compositor
+coreelements:  capsfilter: CapsFilter
+coreelements:  clocksync: ClockSync
+coreelements:  concat: Concat
+coreelements:  dataurisrc: data: URI source element
+coreelements:  downloadbuffer: DownloadBuffer
+coreelements:  fakesink: Fake Sink
+coreelements:  fakesrc: Fake Source
+coreelements:  fdsink: Filedescriptor Sink
+coreelements:  fdsrc: Filedescriptor Source
+coreelements:  filesink: File Sink
+coreelements:  filesrc: File Source
+coreelements:  funnel: Funnel pipe fitting
+coreelements:  identity: Identity
+coreelements:  input-selector: Input selector
+coreelements:  multiqueue: MultiQueue
+coreelements:  output-selector: Output selector
+coreelements:  queue: Queue
+coreelements:  queue2: Queue 2
+coreelements:  streamiddemux: Streamid Demux
+coreelements:  tee: Tee pipe fitting
+coreelements:  typefind: TypeFind
+coreelements:  valve: Valve element
+coretracers:  factories (GstTracerFactory)
+coretracers:  latency (GstTracerFactory)
+coretracers:  leaks (GstTracerFactory)
+coretracers:  log (GstTracerFactory)
+coretracers:  rusage (GstTracerFactory)
+coretracers:  stats (GstTracerFactory)
+encoding:  encodebin: Encoder Bin
+encoding:  encodebin2: Encoder Bin
+gio:  giosink: GIO sink
+gio:  giosrc: GIO source
+gio:  giostreamsink: GIO stream sink
+gio:  giostreamsrc: GIO stream source
+ogg:  oggaviparse: Ogg AVI parser
+ogg:  oggdemux: Ogg demuxer
+ogg:  oggmux: Ogg muxer
+ogg:  oggparse: Ogg parser
+ogg:  ogmaudioparse: OGM audio stream parser
+ogg:  ogmtextparse: OGM text stream parser
+ogg:  ogmvideoparse: OGM video stream parser
+opengl:  glalpha: OpenGL Alpha Filter
+opengl:  glcolorbalance: Video balance
+opengl:  glcolorconvert: OpenGL color converter
+opengl:  glcolorscale: OpenGL color scale
+opengl:  gldeinterlace: OpenGL deinterlacing filter
+opengl:  gldifferencematte: Gstreamer OpenGL DifferenceMatte
+opengl:  gldownload: OpenGL downloader
+opengl:  gleffects: Gstreamer OpenGL Effects
+opengl:  gleffects_blur: Blur with 9x9 separable convolution Effect
+opengl:  gleffects_bulge: Bulge Effect
+opengl:  gleffects_fisheye: FishEye Effect
+opengl:  gleffects_glow: Glow Lighting Effect
+opengl:  gleffects_heat: Heat Signature Effect
+opengl:  gleffects_identity: Do nothing Effect
+opengl:  gleffects_laplacian: Laplacian Convolution Demo Effect
+opengl:  gleffects_lumaxpro: Luma Cross Processing Effect
+opengl:  gleffects_mirror: Mirror Effect
+opengl:  gleffects_sepia: Sepia Toning Effect
+opengl:  gleffects_sin: All Grey but Red Effect
+opengl:  gleffects_sobel: Sobel edge detection Effect
+opengl:  gleffects_square: Square Effect
+opengl:  gleffects_squeeze: Squeeze Effect
+opengl:  gleffects_stretch: Stretch Effect
+opengl:  gleffects_tunnel: Light Tunnel Effect
+opengl:  gleffects_twirl: Twirl Effect
+opengl:  gleffects_xpro: Cross Processing Effect
+opengl:  gleffects_xray: Glowing negative effect
+opengl:  glfilterapp: OpenGL application filter
+opengl:  glfilterbin: GL Filter Bin
+opengl:  glfiltercube: OpenGL cube filter
+opengl:  glfilterglass: OpenGL glass filter
+opengl:  glimagesink: GL Sink Bin
+opengl:  glimagesinkelement: OpenGL video sink
+opengl:  glmixerbin: OpenGL video_mixer empty bin
+opengl:  glmosaic: OpenGL mosaic
+opengl:  gloverlaycompositor: OpenGL overlaying filter
+opengl:  glshader: OpenGL fragment shader filter
+opengl:  glsinkbin: GL Sink Bin
+opengl:  glsrcbin: GL Src Bin
+opengl:  glstereomix: OpenGL stereo video combiner
+opengl:  glstereosplit: GLStereoSplit
+opengl:  gltestsrc: Video test source
+opengl:  glupload: OpenGL uploader
+opengl:  glvideomixer: OpenGL video_mixer bin
+opengl:  glvideomixerelement: OpenGL video_mixer
+opengl:  glviewconvert: OpenGL Multiview/3D conversion filter
+opus:  opusdec: Opus audio decoder
+opus:  opusenc: Opus audio encoder
+overlaycomposition:  overlaycomposition: Overlay Composition
+pbtypes:  GstVideoMultiviewFlagsSet (GstDynamicTypeFactory)
+playback:  decodebin: Decoder Bin
+playback:  decodebin3: Decoder Bin 3
+playback:  parsebin: Parse Bin
+playback:  playbin: Player Bin 2
+playback:  playbin3: Player Bin 3
+playback:  playsink: Player Sink
+playback:  streamsynchronizer: Stream Synchronizer
+playback:  subtitleoverlay: Subtitle Overlay
+playback:  uridecodebin: URI Decoder
+playback:  uridecodebin3: URI Decoder
+playback:  urisourcebin: URI reader
+rawparse:  rawaudioparse: rawaudioparse
+rawparse:  rawvideoparse: rawvideoparse
+rawparse:  unalignedaudioparse: unalignedaudioparse
+rawparse:  unalignedvideoparse: unalignedvideoparse
+staticelements:  bin: Generic bin
+staticelements:  pipeline: Pipeline object
+subparse:  ssaparse: SSA Subtitle Parser
+subparse:  subparse: Subtitle parser
+subparse: subparse_typefind: srt, sub, mpsub, mdvd, smi, txt, dks, vtt
+tcp:  multifdsink: Multi filedescriptor sink
+tcp:  multisocketsink: Multi socket sink
+tcp:  socketsrc: socket source
+tcp:  tcpclientsink: TCP client sink
+tcp:  tcpclientsrc: TCP client source
+tcp:  tcpserversink: TCP server sink
+tcp:  tcpserversrc: TCP server source
+typefindfunctions: application/dash+xml: mpd, MPD
+typefindfunctions: application/itc: itc
+typefindfunctions: application/msword: doc
+typefindfunctions: application/mxf: mxf
+typefindfunctions: application/octet-stream: no extensions
+typefindfunctions: application/ogg: ogg, oga, ogv, ogm, ogx, spx, anx, axa, axv
+typefindfunctions: application/pdf: pdf
+typefindfunctions: application/postscript: ps
+typefindfunctions: application/sdp: sdp
+typefindfunctions: application/smil: smil
+typefindfunctions: application/ttml+xml: ttml+xml
+typefindfunctions: application/vnd.apple-fcp+xml: fcpxml
+typefindfunctions: application/vnd.apple-xmeml+xml: xmeml
+typefindfunctions: application/vnd.ms-sstr+xml: no extensions
+typefindfunctions: application/vnd.pixar.opentimelineio+json: otio
+typefindfunctions: application/vnd.rn-realmedia: ra, ram, rm, rmvb
+typefindfunctions: application/x-3gp: 3gp
+typefindfunctions: application/x-ape: ape
+typefindfunctions: application/x-apetag: mp3, ape, mpc, wv
+typefindfunctions: application/x-ar: a
+typefindfunctions: application/x-bzip: bz2
+typefindfunctions: application/x-compress: Z
+typefindfunctions: application/x-executable: no extensions
+typefindfunctions: application/x-gzip: gz
+typefindfunctions: application/x-hls: m3u8
+typefindfunctions: application/x-id3v1: mp3, mp2, mp1, mpga, ogg, flac, tta
+typefindfunctions: application/x-id3v2: mp3, mp2, mp1, mpga, ogg, flac, tta
+typefindfunctions: application/x-mcc: mcc
+typefindfunctions: application/x-mmsh: no extensions
+typefindfunctions: application/x-ms-dos-executable: dll, exe, ocx, sys, scr, msstyles, cpl
+typefindfunctions: application/x-ogg-skeleton: no extensions
+typefindfunctions: application/x-ogm-audio: no extensions
+typefindfunctions: application/x-ogm-text: no extensions
+typefindfunctions: application/x-ogm-video: no extensions
+typefindfunctions: application/x-pn-realaudio: ra, ram, rm, rmvb
+typefindfunctions: application/x-rar: rar
+typefindfunctions: application/x-scc: scc
+typefindfunctions: application/x-shockwave-flash: swf, swfl
+typefindfunctions: application/x-ssa: ssa, ass
+typefindfunctions: application/x-subtitle-vtt: vtt
+typefindfunctions: application/x-tar: tar
+typefindfunctions: application/x-yuv4mpeg: no extensions
+typefindfunctions: application/xges: xges
+typefindfunctions: application/xml: xml
+typefindfunctions: application/zip: zip
+typefindfunctions: audio/aac: aac, adts, adif, loas
+typefindfunctions: audio/audible: aa, aax
+typefindfunctions: audio/iLBC-sh: ilbc
+typefindfunctions: audio/midi: mid, midi
+typefindfunctions: audio/mobile-xmf: mxmf
+typefindfunctions: audio/mpeg: mp3, mp2, mp1, mpga
+typefindfunctions: audio/qcelp: qcp
+typefindfunctions: audio/riff-midi: mid, midi
+typefindfunctions: audio/x-ac3: ac3, eac3
+typefindfunctions: audio/x-aiff: aiff, aif, aifc
+typefindfunctions: audio/x-amr-nb-sh: amr
+typefindfunctions: audio/x-amr-wb-sh: amr
+typefindfunctions: audio/x-au: au, snd
+typefindfunctions: audio/x-ay: ay
+typefindfunctions: audio/x-caf: caf
+typefindfunctions: audio/x-celt: no extensions
+typefindfunctions: audio/x-dts: dts
+typefindfunctions: audio/x-flac: flac
+typefindfunctions: audio/x-gbs: gbs
+typefindfunctions: audio/x-gsm: gsm
+typefindfunctions: audio/x-gym: gym
+typefindfunctions: audio/x-imelody: imy, ime, imelody
+typefindfunctions: audio/x-ircam: sf
+typefindfunctions: audio/x-kss: kss
+typefindfunctions: audio/x-m4a: m4a
+typefindfunctions: audio/x-mod: 669, amf, ams, dbm, digi, dmf, dsm, gdm, far, imf, it, j2b, mdl, med, mod, mt2, mtm, okt, psm, ptm, sam, s3m, stm, stx, ult, umx, xm
+typefindfunctions: audio/x-musepack: mpc, mpp, mp+
+typefindfunctions: audio/x-nist: nist
+typefindfunctions: audio/x-nsf: nsf
+typefindfunctions: audio/x-paris: paf
+typefindfunctions: audio/x-rf64: rf64
+typefindfunctions: audio/x-sap: sap
+typefindfunctions: audio/x-sbc: sbc
+typefindfunctions: audio/x-sds: sds
+typefindfunctions: audio/x-shorten: shn
+typefindfunctions: audio/x-sid: sid
+typefindfunctions: audio/x-spc: spc
+typefindfunctions: audio/x-speex: no extensions
+typefindfunctions: audio/x-svx: iff, svx
+typefindfunctions: audio/x-tap-dmp: dmp
+typefindfunctions: audio/x-tap-tap: tap
+typefindfunctions: audio/x-ttafile: tta
+typefindfunctions: audio/x-vgm: vgm
+typefindfunctions: audio/x-voc: voc
+typefindfunctions: audio/x-vorbis: no extensions
+typefindfunctions: audio/x-w64: w64
+typefindfunctions: audio/x-wav: wav
+typefindfunctions: audio/x-wavpack: wv, wvp
+typefindfunctions: audio/x-wavpack-correction: wvc
+typefindfunctions: audio/x-xi: xi
+typefindfunctions: image/bmp: bmp
+typefindfunctions: image/gif: gif
+typefindfunctions: image/jp2: jp2
+typefindfunctions: image/jpeg: jpg, jpe, jpeg
+typefindfunctions: image/png: png
+typefindfunctions: image/svg+xml: svg
+typefindfunctions: image/tiff: tif, tiff
+typefindfunctions: image/vnd.adobe.photoshop: psd
+typefindfunctions: image/vnd.wap.wbmp: no extensions
+typefindfunctions: image/webp: webp
+typefindfunctions: image/x-degas: no extensions
+typefindfunctions: image/x-exr: exr
+typefindfunctions: image/x-icon: no extensions
+typefindfunctions: image/x-jng: jng
+typefindfunctions: image/x-jpc: jpc, j2k
+typefindfunctions: image/x-portable-pixmap: pnm, ppm, pgm, pbm
+typefindfunctions: image/x-quicktime: qif, qtif, qti
+typefindfunctions: image/x-sun-raster: ras
+typefindfunctions: image/x-xcf: xcf
+typefindfunctions: image/x-xpixmap: xpm
+typefindfunctions: multipart/x-mixed-replace: no extensions
+typefindfunctions: subtitle/x-kate: no extensions
+typefindfunctions: text/html: htm, html
+typefindfunctions: text/plain: txt
+typefindfunctions: text/uri-list: ram
+typefindfunctions: text/utf-16: txt
+typefindfunctions: text/utf-32: txt
+typefindfunctions: text/x-cmml: no extensions
+typefindfunctions: video/mj2: mj2
+typefindfunctions: video/mpeg-elementary: mpv, mpeg, mpg
+typefindfunctions: video/mpeg-sys: mpe, mpeg, mpg
+typefindfunctions: video/mpeg4: m4v
+typefindfunctions: video/mpegts: ts, mts
+typefindfunctions: video/quicktime: mov, mp4
+typefindfunctions: video/vivo: viv
+typefindfunctions: video/x-cdxa: dat
+typefindfunctions: video/x-dirac: no extensions
+typefindfunctions: video/x-dv: dv, dif
+typefindfunctions: video/x-fli: flc, fli
+typefindfunctions: video/x-flv: flv
+typefindfunctions: video/x-h263: h263, 263
+typefindfunctions: video/x-h264: h264, x264, 264
+typefindfunctions: video/x-h265: h265, x265, 265
+typefindfunctions: video/x-ivf: ivf
+typefindfunctions: video/x-matroska: mkv, mka, mk3d, webm
+typefindfunctions: video/x-mng: mng
+typefindfunctions: video/x-ms-asf: asf, wm, wma, wmv
+typefindfunctions: video/x-msvideo: avi
+typefindfunctions: video/x-mve: mve
+typefindfunctions: video/x-nuv: nuv
+typefindfunctions: video/x-pva: pva
+typefindfunctions: video/x-theora: no extensions
+typefindfunctions: video/x-vcd: dat
+videoconvert:  videoconvert: Colorspace converter
+videorate:  videorate: Video rate adjuster
+videoscale:  videoscale: Video scaler
+videotestsrc:  videotestsrc: Video test source
+volume:  volume: Volume
+vorbis:  vorbisdec: Vorbis audio decoder
+vorbis:  vorbisenc: Vorbis audio encoder
+vorbis:  vorbisparse: VorbisParse
+vorbis:  vorbistag: VorbisTag
+ximagesink:  ximagesink: Video sink
+
+Total count: 32 plugins, 291 features

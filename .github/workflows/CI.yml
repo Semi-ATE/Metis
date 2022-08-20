@@ -29,6 +29,8 @@ jobs:
           pip list
           dpkg -l | grep gst
           ls -la ~/.cache
+          gst-inspect-1.0 > test
+          ls -la ~/.cache
       - name: Run tests
         shell: bash
         run: |
