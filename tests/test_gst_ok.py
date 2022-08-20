@@ -1,8 +1,12 @@
 import os
 test_loc = os.path.dirname(__file__)
-root_loc = os.path.join(test_loc, "..")
-os.environ['GST_PLUGIN_PATH'] = "/home/runner/work/Metis/Metis/Metis" #os.path.join(root_loc, "Metis")
-print(f"GST_PLUGIN_PATH = {os.environ['GST_PLUGIN_PATH']}")
+print(f"test_loc {test_loc}")
+from pathlib import Path
+root_loc = Path(test_loc).parent
+#root_loc = os.path.parent.absolute()
+print(f"root_loc {root_loc}")
+os.environ['GST_PLUGIN_PATH'] = os.path.join(root_loc, "Metis")
+print(f"test_gst.ok GST_PLUGIN_PATH = {os.environ['GST_PLUGIN_PATH']}")
 import gi
 import time
 import threading

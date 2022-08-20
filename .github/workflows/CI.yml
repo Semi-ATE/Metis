@@ -22,8 +22,9 @@ jobs:
           ls -la
       - name: Run tests
         shell: bash
-        run: 
+        run: |
           bash scripttest.sh
+          pytest -s
       - name: Create package
         run: python setup.py sdist
       - name: Check package
