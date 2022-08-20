@@ -4,15 +4,13 @@ import inotify.adapters
 import os
 import sys
 import gi
-import time
-import subprocess
-from yaml import safe_load, dump 
+from yaml import safe_load 
 from datetime import datetime
 import threading
 import logging
 
 gi.require_version('Gst', '1.0')
-from gi.repository import Gst, GLib, GObject
+from gi.repository import Gst
 
 def _main():
     here = os.path.realpath(__file__)

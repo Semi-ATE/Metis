@@ -8,16 +8,14 @@ print(f"root_loc {root_loc}")
 os.environ['GST_PLUGIN_PATH'] = os.path.join(root_loc, "Metis")
 print(f"test_gst.ok GST_PLUGIN_PATH = {os.environ['GST_PLUGIN_PATH']}")
 import gi
-import time
 import threading
 import filecmp
 import sys
-import stat
 
 from Metis.sinotify import start_stream
 
 gi.require_version('Gst', '1.0')
-from gi.repository import Gst, GLib, GObject
+from gi.repository import Gst
 
 # The file from which we will read and write into src_file to stimulate inotify
 org_file = os.path.join(test_loc, "test.std")

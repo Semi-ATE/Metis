@@ -8,16 +8,13 @@ os.environ['GST_PLUGIN_PATH'] = os.path.join(root_loc, "Metis")
 print(f"test_gst_nok.py GST_PLUGIN_PATH = {os.environ['GST_PLUGIN_PATH']}")
 
 import gi
-import time
 import threading
-import filecmp
 import sys
-import stat
 
 from Metis.sinotify import start_stream
 
 gi.require_version('Gst', '1.0')
-from gi.repository import Gst, GLib, GObject
+from gi.repository import Gst
 
 # The file from which we will read and write into src_file to stimulate inotify
 org_file = os.path.join(test_loc, "test.std")
@@ -212,7 +209,7 @@ def test_negative_exist():
                     byteorder = sys.byteorder
                 ver = in_file.read(1)
 
-                len_rec = int.from_bytes(rec_len, byteorder)
+                int.from_bytes(rec_len, byteorder)
 
                 out_file.write(rec_len)
                 out_file.write(rec_type)

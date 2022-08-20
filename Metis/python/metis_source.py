@@ -1,10 +1,8 @@
 import gi
-import time
 import sys
 import inotify.adapters
 import os
 import logging
-import numpy as np
 from datetime import datetime
 
 try:
@@ -67,7 +65,7 @@ class metis_source(GstBase.BaseSrc, MetisConfig):
             raise AttributeError('unknown property %s' % prop.name)        
 
     def do_start (self):
-        print(f"Metis source plugin started")
+        print("Metis source plugin started")
         
         self.l = inotify.adapters.Inotify()
         

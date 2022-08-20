@@ -1,9 +1,7 @@
 import os
 import sys
-import time
 import logging
-from yaml import safe_load, dump 
-from datetime import datetime
+from yaml import safe_load
 
 file_loc = os.path.dirname(__file__)
 test_loc = os.path.join(file_loc, "../../tests/test_metisd.yaml")
@@ -27,7 +25,7 @@ class MetisConfig():
             with open("/etc/metisd.yaml", "r") as f:
                 config_data = safe_load(f)
                 return config_data
-        except Exception as e:
+        except:
             # In the case of test mode:
             try:
                 with open(test_loc, "r") as f:

@@ -20,7 +20,6 @@ file_loc = os.path.dirname(__file__)
 gi.require_version("Gst", "1.0")
 gi.require_version('GstBase', '1.0')
 
-from os import path
 from gi.repository import Gst, GObject, GstBase
 Gst.init(None)
 
