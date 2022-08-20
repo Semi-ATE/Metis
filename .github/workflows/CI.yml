@@ -22,7 +22,7 @@ jobs:
         run: |
           sudo apt-get install -y libhdf5-dev inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools
           conda install -c conda-forge gst-plugins-base==1.20.3 gst-python==1.20.3 gstreamer==1.20.3
-          pip install gobject PyGObject inotify h5py
+          pip install gobject PyGObject inotify h5py pytest pytest-cov check-manifest setuptools twine tree tqdm h5py semi-ate-stdf pandas tables
           pwd
           ls -la
           conda list 
