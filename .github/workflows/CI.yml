@@ -40,6 +40,7 @@ jobs:
           ls -la ~/.cache/gstreamer-1.0/
           echo "========= gst plugin list     ==========="
           cat gst_plugins_list
+          GST_PLUGIN_PATH=$GST_PLUGIN_PATH gst-inspect-1.0 metis_source
           
       - name: Run tests
         shell: bash
