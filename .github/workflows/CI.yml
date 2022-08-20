@@ -26,11 +26,11 @@ jobs:
       - name: Run tests
         shell: bash
         run: |
-          echo "====================================="
+          echo "========= GST_PLUGIN_PATH ==========="
           echo $GST_PLUGIN_PATH
           echo "====================================="
-          bash scripttest.sh
           pytest -s
+#          bash scripttest.sh
       - name: Create package
         run: python setup.py sdist
       - name: Check package
