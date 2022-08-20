@@ -22,7 +22,7 @@ jobs:
           python-version: '3.10.5'
       - name: Setup dependencies
         run: |
-          sudo apt-get install -y libhdf5-dev inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools gstreamer1.0-python3-plugin-loader
+          sudo apt-get install -y libhdf5-dev inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools gstreamer1.0-python3-plugin-loader h5py inotify pyaml
           pip install -r requirements/test.txt
           pwd
           ls -la
@@ -36,10 +36,8 @@ jobs:
           dpkg -l | grep gst
           echo "========= home cache folder   ==========="
           ls -la ~/.cache
-          echo "========= METIS plugins   ==========="
+          echo "========= METIS plugins folder ==========="
           ls -la /home/runner/work/Metis/Metis/Metis
-          echo "========= GST_PLUGIN_PATH ==========="
-          echo $GST_PLUGIN_PATH
           echo "========= PWD folder ==========="
           echo $PWD
           
