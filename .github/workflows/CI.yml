@@ -27,8 +27,13 @@ jobs:
           pip install -r requirements/test.txt
           pwd
           ls -la
+          echo "========= conda list   ==========="
           conda list 
+          echo "========= pip list   ==========="
           pip list
+          echo "========= pip3 list   ==========="
+          pip3 list
+          echo "========= debian gst*.deb list   ==========="
           dpkg -l | grep gst
           echo "========= home cache folder   ==========="
           ls -la ~/.cache
@@ -38,11 +43,6 @@ jobs:
           echo $GST_PLUGIN_PATH
           echo "========= PWD folder ==========="
           echo $PWD
-          gst-inspect-1.0 > gst_plugins_list
-          echo "========= home cache folder   ==========="
-          ls -la ~/.cache/gstreamer-1.0/
-          echo "========= gst plugin list     ==========="
-          cat gst_plugins_list
           
       - name: Run tests
         shell: bash
@@ -50,6 +50,12 @@ jobs:
           echo "========= GST_PLUGIN_PATH ==========="
           echo $GST_PLUGIN_PATH
           echo "====================================="
+          gst-inspect-1.0 > gst_plugins_list
+          echo "========= home cache folder   ==========="
+          ls -la ~/.cache/gstreamer-1.0/
+          echo "========= gst plugin list     ==========="
+          cat gst_plugins_list
+
           pytest -s
 #          bash scripttest.sh
       - name: Create package
