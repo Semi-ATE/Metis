@@ -19,9 +19,9 @@ jobs:
         run: |
           sudo apt-get install -y libhdf5-dev inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools
           conda install -c conda-forge gst-plugins-base==1.20.3 gst-python==1.20.3 gstreamer==1.20.3 gobject-introspection
+          pip install gobject pygobject
           pip install -r requirements/run.txt
           pip install -r requirements/test.txt
-          pip install gobject pygobject
           pwd
           ls -la
           conda list 
