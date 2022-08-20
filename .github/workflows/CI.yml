@@ -7,6 +7,8 @@ env:
 
 #          pip install -r requirements/run.txt
 #          pip install -r requirements/test.txt
+#          conda install -c conda-forge gst-plugins-base==1.20.3 gst-python==1.20.3 gstreamer==1.20.3 pyaml yaml h5py
+#          pip3 install gobject PyGObject inotify  pytest pytest-cov check-manifest setuptools twine tree tqdm semi-ate-stdf pandas tables pyyaml
   
 jobs:
   test-linux:
@@ -21,8 +23,8 @@ jobs:
       - name: Setup dependencies
         run: |
           sudo apt-get install -y libhdf5-dev inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools gstreamer1.0-python3-plugin-loader
-          conda install -c conda-forge gst-plugins-base==1.20.3 gst-python==1.20.3 gstreamer==1.20.3 pyaml yaml h5py
-          pip3 install gobject PyGObject inotify  pytest pytest-cov check-manifest setuptools twine tree tqdm semi-ate-stdf pandas tables pyyaml
+          pip install -r requirements/run.txt
+          pip install -r requirements/test.txt
           pwd
           ls -la
           conda list 
