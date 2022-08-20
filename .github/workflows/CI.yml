@@ -2,6 +2,9 @@ name: CI
 
 on: [push]
 
+env:
+  GST_PLUGIN_PATH: /home/runner/work/Metis/Metis/Metis
+  
 jobs:
   test-linux:
     runs-on: ubuntu-latest
@@ -24,11 +27,9 @@ jobs:
         shell: bash
         run: |
           echo "====================================="
-          echo " GST_PLUGIN_PATH = " $GST_PLUGIN_PATH
-          bash scripttest.sh
-          export GST_PLUGIN_PATH=/home/runner/work/Metis/Metis/Metis
+          echo $GST_PLUGIN_PATH
           echo "====================================="
-          echo " GST_PLUGIN_PATH = " $GST_PLUGIN_PATH
+          bash scripttest.sh
           pytest -s
       - name: Create package
         run: python setup.py sdist
