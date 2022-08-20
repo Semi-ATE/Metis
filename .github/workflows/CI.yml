@@ -20,7 +20,7 @@ jobs:
           python-version: '3.10.5'
       - name: Setup dependencies
         run: |
-          sudo apt-get install -y python-h5py libhdf5-dev inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools gstreamer1.0-python3-plugin-loader
+          sudo apt-get install -y libhdf5 libhdf5-dev inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools gstreamer1.0-python3-plugin-loader
           conda install -c conda-forge gst-plugins-base==1.20.3 gst-python==1.20.3 gstreamer==1.20.3 pyaml yaml h5py
           pip install gobject PyGObject inotify  pytest pytest-cov check-manifest setuptools twine tree tqdm semi-ate-stdf pandas tables pyyaml
           pwd
