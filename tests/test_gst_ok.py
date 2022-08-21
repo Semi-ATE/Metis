@@ -81,6 +81,7 @@ def test_gst_pass():
                 out_file.write(rec)
                 out_file.close()
 
+    thread.join()
     res = filecmp.cmp(org_file, dst_file, shallow=False)
     assert res == True
     
