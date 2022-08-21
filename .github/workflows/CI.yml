@@ -32,6 +32,8 @@ jobs:
           sudo apt-get install -y mlocate
           locate *h5py*.so libhdf5_cpp.so
           echo "???????????????"
+          echo "========= python version ==========="
+          python --version
           pwd
           ls -la
           echo "========= conda list   ==========="
@@ -47,7 +49,7 @@ jobs:
           ls -la /home/runner/work/Metis/Metis/Metis
           echo "========= PWD folder ==========="
           echo $PWD
-          gst-inspect-1.0 > gst_plugins_list
+          GST_DEBUG=6 gst-inspect-1.0 > gst_plugins_list
           echo "========= sys_source.path file   ==========="
           cat /home/runner/work/Metis/Metis/sys_source.path
           echo "========= sys_sink.path file   ==========="
