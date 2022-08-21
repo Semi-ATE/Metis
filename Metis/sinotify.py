@@ -95,17 +95,20 @@ def start_stream(src_file, out_sink, conf_file):
     # create the elements
     source = Gst.ElementFactory.make("metis_source", "metis_source")
     if not source:
+        print(f'Can not find source plugin,  file:{src_file}, time:{datetime.now()}.')
         logging.error(f'Can not find source plugin,  file:{src_file}, time:{datetime.now()}.')
         sys.exit(1)
         
     mid = Gst.ElementFactory.make("metis_process", "metis_process")
     if not mid:
+        print(f'Can not find mid plugin,  file:{src_file}, time:{datetime.now()}.')
         logging.error(f'Can not find mid plugin,  file:{src_file}, time:{datetime.now()}.')
         #print("ERROR: Can not find mid plugin")
         sys.exit(1)
 
     sink = Gst.ElementFactory.make("metis_sink", "metis_sink")
     if not sink:
+        print(f'Can not find sink plugin,  file:{src_file}, time:{datetime.now()}.')
         logging.error(f'Can not find sink plugin,  file:{src_file}, time:{datetime.now()}.')
         #print("ERROR: Can not find sink plugin")
         sys.exit(1)
