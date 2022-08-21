@@ -47,7 +47,7 @@ jobs:
 #         inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools gstreamer1.0-python3-plugin-loader 
          
       - name: Run tests
-        shell: bash
+#        shell: bash
         run: |
           echo "========= GST_PLUGIN_PATH ==========="
           echo $GST_PLUGIN_PATH
