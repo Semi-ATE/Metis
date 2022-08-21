@@ -23,7 +23,7 @@ jobs:
           python-version: '3.10.5'
       - name: Create conda env
         shell: bash
-        run:
+        run: |
           conda config --add channels conda-forge
           conda create -n gst python==3.10.5
           conda init bash
