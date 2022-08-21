@@ -30,37 +30,35 @@ jobs:
 #         pytest pytest-cov check-manifest setuptools twine tree tqdm semi-ate-stdf pandas tables gobject PyGObject inotify pyaml
 #          pip install -r requirements/test.txt
 #         inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools gstreamer1.0-python3-plugin-loader 
-#          pwd
-#          ls -la
-#          echo "========= conda list   ==========="
-#          conda list 
-#          echo "========= pip list   ==========="
-#          pip list
-#          echo "========= pip3 list   ==========="
-#          pip3 list
-#          echo "========= debian gst*.deb list   ==========="
-#          dpkg -l | grep gst
-#          dpkg -l | grep hdf5
-#          echo "========= home cache folder   ==========="
-#          ls -la ~/.cache
-#          echo "========= METIS plugins folder ==========="
-#          ls -la /home/runner/work/Metis/Metis/Metis
-#          echo "========= PWD folder ==========="
-#          echo $PWD
-          
-#      - name: Run tests
-#        shell: bash
-#        run: |
-#          echo "========= GST_PLUGIN_PATH ==========="
-#          echo $GST_PLUGIN_PATH
-#          echo "====================================="
-#          gst-inspect-1.0 > gst_plugins_list
-#          echo "========= home cache folder   ==========="
-#          ls -la ~/.cache/gstreamer-1.0/
-#          echo "========= gst plugin list     ==========="
-#          cat gst_plugins_list
-#
-#          pytest -s
+          pwd
+          ls -la
+          echo "========= conda list   ==========="
+          conda list 
+          echo "========= pip list   ==========="
+          pip list
+          echo "========= debian gst*.deb list   ==========="
+          dpkg -l | grep gst
+          dpkg -l | grep hdf5
+          echo "========= home cache folder   ==========="
+          ls -la ~/.cache
+          echo "========= METIS plugins folder ==========="
+          ls -la /home/runner/work/Metis/Metis/Metis
+          echo "========= PWD folder ==========="
+          echo $PWD
+         
+      - name: Run tests
+        shell: bash
+        run: |
+          echo "========= GST_PLUGIN_PATH ==========="
+          echo $GST_PLUGIN_PATH
+          echo "====================================="
+          gst-inspect-1.0 > gst_plugins_list
+          echo "========= home cache folder   ==========="
+          ls -la ~/.cache/gstreamer-1.0/
+          echo "========= gst plugin list     ==========="
+          cat gst_plugins_list
+
+          pytest -s
 #          bash scripttest.sh
 #      - name: Create package
 #        run: python setup.py sdist
