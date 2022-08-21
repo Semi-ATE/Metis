@@ -30,6 +30,8 @@ jobs:
       - name: Create package
         run: python setup.py sdist
       - name: Check package
+        shell: bash -l {0}
         run: twine check dist/*
       - name: Check manifest 
+        shell: bash -l {0}
         run: check-manifest
