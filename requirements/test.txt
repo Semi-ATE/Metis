@@ -6,3 +6,10 @@ setuptools
 twine
 tree
 tqdm
+semi-ate-stdf
+pandas
+tables
+gobject
+PyGObject
+inotify
+pyaml
