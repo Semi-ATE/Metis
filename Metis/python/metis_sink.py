@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import numpy as np
 import sys
 import gi
 import os
-import h5py
 import time
 import logging
 from datetime import datetime
+import numpy as np
+import h5py
 
 try:
     from .MetisConfig import MetisConfig
