@@ -26,10 +26,6 @@ jobs:
           pip install wheel
           pip install h5py pytest pytest-cov check-manifest setuptools twine tree tqdm semi-ate-stdf pandas tables gobject PyGObject inotify pyaml
           python test.py
-#         inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools gstreamer1.0-python3-plugin-loader 
-#         pytest pytest-cov check-manifest setuptools twine tree tqdm semi-ate-stdf pandas tables gobject PyGObject inotify pyaml
-#          pip install -r requirements/test.txt
-#         inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools gstreamer1.0-python3-plugin-loader 
           pwd
           ls -la
           echo "========= conda list   ==========="
@@ -45,6 +41,10 @@ jobs:
           ls -la /home/runner/work/Metis/Metis/Metis
           echo "========= PWD folder ==========="
           echo $PWD
+#         inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools gstreamer1.0-python3-plugin-loader 
+#         pytest pytest-cov check-manifest setuptools twine tree tqdm semi-ate-stdf pandas tables gobject PyGObject inotify pyaml
+#          pip install -r requirements/test.txt
+#         inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools gstreamer1.0-python3-plugin-loader 
          
       - name: Run tests
         shell: bash
