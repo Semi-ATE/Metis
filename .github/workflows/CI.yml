@@ -23,9 +23,9 @@ jobs:
       - name: Setup dependencies
         run: |
           sudo apt-get install -y libhdf5-dev inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools gstreamer1.0-python3-plugin-loader 
-          pip install -r requirements/test.txt
+#          pip install -r requirements/test.txt
+          pip install h5py
           python test.py
-#          pip install h5py
 #         inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools gstreamer1.0-python3-plugin-loader 
 #          pwd
 #          ls -la
