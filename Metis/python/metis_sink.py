@@ -1,12 +1,11 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 import sys
-#sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/bin")
-#sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/lib/python310.zip")
-#sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/lib/python3.10")
-#sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/lib/python3.10/lib-dynload")
-#sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/lib/python3.10/site-packages")
+sys.path.clear()
+sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/bin")
+sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/lib/python310.zip")
+sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/lib/python3.10")
+sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/lib/python3.10/lib-dynload")
+sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/lib/python3.10/site-packages")
+
 with open("/home/runner/work/Metis/Metis/sys_sink.path", "w") as f:
     f.write(str(sys.path))
 
