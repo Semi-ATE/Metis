@@ -58,6 +58,7 @@ def test_SHP():
     
     f.close()
     
+    
 def test_SCC():
 
     make_stdf()

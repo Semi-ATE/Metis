@@ -6,7 +6,10 @@ setuptools
 twine
 tree
 tqdm
-h5py
 semi-ate-stdf
 pandas
 tables
+gobject
+PyGObject
+inotify
+pyaml

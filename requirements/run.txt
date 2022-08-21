@@ -3,3 +3,7 @@ semi-ate-stdf
 pandas
 tqdm
 tables
+inotify
+gobject 
+PyGObject
+pyaml 

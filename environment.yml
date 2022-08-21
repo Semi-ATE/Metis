@@ -1,0 +1,25 @@
+name: test
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10.5
+  - anaconda-client
+  - conda-build
+  - mamba
+  - pytest
+  - pytest-cov
+  - check-manifest
+  - pip 
+  - setuptools 
+  - twine
+  - tree
+  - h5py 
+  - tqdm 
+  - semi-ate-stdf 
+  - pandas 
+  - PyGObject 
+  - pyaml
+  - gst-plugins-base 
+  - gst-python 
+  - gstreamer
+   

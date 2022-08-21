@@ -1,0 +1,14 @@
+[Unit]
+Description=Metis stdf watcher service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+ExecStart=/usr/share/metis/start_metis.sh
+
+[Install]
+WantedBy=multi-user.target
