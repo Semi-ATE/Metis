@@ -30,8 +30,7 @@ jobs:
           python test.py
           pytest -s test.py
           sudo apt-get install -y mlocate
-          locate h5.cpython-310-x86_64-linux-gnu.so libhdf5_cpp.so
-          ldd /opt/hostedtoolcache/Python/3.10.5/x64/lib/python3.10/site-packages/h5py/h5.cpython-310-x86_64-linux-gnu.so
+          locate *h5py*.so libhdf5_cpp.so
           echo "???????????????"
           pwd
           ls -la
