@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 import gi
 import sys
+print("SYS PATH:")
+print(sys.path)
 import os
 import logging
 from datetime import datetime
