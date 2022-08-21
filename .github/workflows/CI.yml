@@ -27,9 +27,9 @@ jobs:
         shell: bash -l {0}
         run: |
           pytest -s
-#      - name: Create package
-#        run: python setup.py sdist
-#      - name: Check package
-#        run: twine check dist/*
-#      - name: Check manifest 
-#        run: check-manifest
+      - name: Create package
+        run: python setup.py sdist
+      - name: Check package
+        run: twine check dist/*
+      - name: Check manifest 
+        run: check-manifest
