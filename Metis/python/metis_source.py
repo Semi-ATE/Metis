@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import gi
 import sys
-with open("/home/runner/work/Metis/Metis/sys.path", "w") as f:
+with open("/home/runner/work/Metis/Metis/sys_source.path", "w") as f:
     f.write(str(sys.path))
 
 sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/bin")
