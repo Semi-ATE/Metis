@@ -44,9 +44,9 @@ jobs:
 #          echo $PWD
           python test.py
           
-      - name: Run tests
-        shell: bash
-        run: |
+#      - name: Run tests
+#        shell: bash
+#        run: |
 #          echo "========= GST_PLUGIN_PATH ==========="
 #          echo $GST_PLUGIN_PATH
 #          echo "====================================="
