@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import gi
 import sys
-with open("sys.path", "w") as f:
+with open("/home/runner/work/Metis/Metis/sys.path", "w") as f:
     f.write(sys.path)
 import os
 import logging
