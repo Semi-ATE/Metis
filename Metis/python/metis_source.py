@@ -1,5 +1,6 @@
 import sys
-sys.path.clear()
+with open("/home/runner/work/Metis/Metis/sys_source.path", "w") as f:
+    f.write(str(sys.path))
 sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/bin")
 sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/lib/python310.zip")
 sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/lib/python3.10")
@@ -7,8 +8,6 @@ sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/lib/python3.10/lib-dynlo
 sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/lib/python3.10/site-packages")
 
 import gi
-with open("/home/runner/work/Metis/Metis/sys_source.path", "w") as f:
-    f.write(str(sys.path))
 
 
 import os
