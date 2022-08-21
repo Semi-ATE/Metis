@@ -4,6 +4,13 @@ import gi
 import sys
 with open("/home/runner/work/Metis/Metis/sys.path", "w") as f:
     f.write(str(sys.path))
+
+sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/bin")
+sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/lib/python310.zip")
+sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/lib/python3.10")
+sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/lib/python3.10/lib-dynload")
+sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/lib/python3.10/site-packages")
+
 import os
 import logging
 from datetime import datetime

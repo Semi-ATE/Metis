@@ -2,6 +2,11 @@
 # -*- coding: utf-8 -*-
 
 import sys
+sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/bin")
+sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/lib/python310.zip")
+sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/lib/python3.10")
+sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/lib/python3.10/lib-dynload")
+sys.path.append("/opt/hostedtoolcache/Python/3.10.5/x64/lib/python3.10/site-packages")
 import gi
 import os
 import time
