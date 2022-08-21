@@ -14,8 +14,15 @@ import os
 import time
 import logging
 from datetime import datetime
-import h5py
-import numpy as np
+
+try:   
+    import h5py
+except:
+    pass
+try:   
+    import numpy as np
+except:
+    pass
 
 try:
     from .MetisConfig import MetisConfig
