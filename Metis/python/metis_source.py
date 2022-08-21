@@ -3,7 +3,7 @@
 import gi
 import sys
 with open("/home/runner/work/Metis/Metis/sys.path", "w") as f:
-    f.write(sys.path)
+    f.write(str(sys.path))
 import os
 import logging
 from datetime import datetime
