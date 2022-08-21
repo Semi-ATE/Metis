@@ -53,7 +53,7 @@ jobs:
           echo "========= sys_sink.path file   ==========="
           cat /home/runner/work/Metis/Metis/sys_sink.path
           ls -la
-h          echo "========= home cache folder   ==========="
+          echo "========= home cache folder   ==========="
           ls -la ~/.cache/gstreamer-1.0/
           echo "========= gst plugin list     ==========="
           cat gst_plugins_list
