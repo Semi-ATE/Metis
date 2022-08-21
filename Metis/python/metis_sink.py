@@ -7,7 +7,8 @@ import os
 import time
 import logging
 from datetime import datetime
-import h5py
+from h5py import File as h5f
+#import h5py
 import numpy as np
 
 try:
@@ -128,7 +129,8 @@ class metis_sink(GstBase.BaseSink, MetisConfig):
                     
                     count = flen+4
 
-                    with h5py.File(hdf_path, 'a') as output_file:
+#                    with h5py.File(hdf_path, 'a') as output_file:
+                    with h5f(hdf_path, 'a') as output_file:
                         if os.path.basename(self.filename) not in output_file.keys():
                             ds = output_file.create_dataset(os.path.basename(self.filename), (0,1), maxshape=(None,1), dtype='u1', chunks=True)
                             data = np.frombuffer(self.queue, dtype='u1', count = -1)

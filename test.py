@@ -1,6 +1,6 @@
-import h5py
+from h5py import File as f
 print("==============================")
-print("h5py was successfully imported")
+print(f"h5py was successfully imported {f}")
 print("==============================")
 import sys
 
