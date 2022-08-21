@@ -21,9 +21,13 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.10.5'
-      - name: Setup dependencies
-        run: |
+      - name: Create conda env
+        shell: bash
+        run:
           conda create  -c conda-forge -n "gst" python==3.10.5
+      - name: Setup dependencies
+        shell: bash
+        run: |
           conda activate gst
           sudo apt-get install -y libhdf5-dev inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools gstreamer1.0-python3-plugin-loader gir1.2-gstreamer-1.0 gstreamer1.0-clutter-3.0 gstreamer1.0-crystalhd gstreamer1.0-gl gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio gstreamer1.0-x libclutter-gst-3.0-0 libgstreamer-gl1.0-0 libgstreamer-plugins-base1.0-0 libgstreamer-plugins-good1.0-0 libgstreamer1.0-0 libgstreamer1.0-dev inotify-tools libinotifytools0
           conda install -c conda-forge gst-plugins-base gst-python gstreamer
