@@ -173,7 +173,7 @@ def start_stream(src_file, out_sink, conf_file):
                 #print(f"ERROR: Unexpected message received : {msg}")
                 logging.error(f'Unexpected message received, msg:{msg}  file:{src_file}, time:{datetime.now()}.')
 
-    #print(f"End of transfering {src_file}")
+    print(f'End of transfering,  file:{src_file}, time:{datetime.now()}.')
     logging.info(f'End of transfering,  file:{src_file}, time:{datetime.now()}.')
     pipeline.set_state(Gst.State.NULL)
 

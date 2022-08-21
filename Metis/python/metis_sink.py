@@ -76,7 +76,7 @@ class metis_sink(GstBase.BaseSink, MetisConfig):
              
     
     def do_render(self, buffer):
-        
+        print("do_render")
         if self.file == None:
             self.file = open(self.filename, "ba")
     
