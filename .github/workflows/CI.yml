@@ -26,7 +26,7 @@ jobs:
           pip install wheel
           pip install h5py pytest pytest-cov check-manifest setuptools twine tree tqdm semi-ate-stdf pandas tables gobject PyGObject inotify pyaml
           python test.py
-          pytest test.py
+          pytest -s test.py
           pwd
           ls -la
           echo "========= conda list   ==========="

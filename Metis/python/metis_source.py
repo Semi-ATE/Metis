@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+import yaml
 import gi
 import sys
 import inotify.adapters

@@ -1,11 +1,13 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
+import numpy as np
 import sys
 import gi
 import os
 import h5py
 import time
 import logging
-import numpy as np
 from datetime import datetime
 
 try:
