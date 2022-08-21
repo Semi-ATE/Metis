@@ -1,2 +1,2 @@
 import h5py
-print("test")
+print("h5py was successfully imported")
