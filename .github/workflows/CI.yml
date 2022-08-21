@@ -22,7 +22,7 @@ jobs:
           python-version: '3.10.5'
       - name: Setup dependencies
         run: |
-          sudo apt-get install -y libhdf5-dev 
+          sudo apt-get install -y libhdf5-dev inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools gstreamer1.0-python3-plugin-loader 
           pip install h5py
           python test.py
 #         inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools gstreamer1.0-python3-plugin-loader 
@@ -59,12 +59,12 @@ jobs:
 #
 #          pytest -s
 #          bash scripttest.sh
-      - name: Create package
-        run: python setup.py sdist
-      - name: Check package
-        run: twine check dist/*
-      - name: Check manifest 
-        run: check-manifest
+#      - name: Create package
+#        run: python setup.py sdist
+#      - name: Check package
+#        run: twine check dist/*
+#      - name: Check manifest 
+#        run: check-manifest
 #  test-windows:
 #    runs-on: windows-latest
 #    steps:
