@@ -111,8 +111,10 @@ class metis_source(GstBase.BaseSrc, MetisConfig):
                 assert self.byteorder == 'little' or self.byteorder == 'big'
             except Exception as e:
                 error = f'Wrong byteorder, file:{self.in_file}, {e}.'
-                sys.exit(error)
-                os._exit
+                print(error)
+                return (-1, -1)
+#                sys.exit(error)
+#                os._exit
             
             ver = self.file.read(1)
             # check for version. if not 4 -> exit
@@ -123,8 +125,10 @@ class metis_source(GstBase.BaseSrc, MetisConfig):
                 assert  ver == b'\x04'
             except Exception as e:
                 error = f'Wrong file version, file:{self.in_file}, {e}.'
-                sys.exit(error)
-                os._exit
+                print(error)
+                return (-1, -1)
+#                sys.exit(error)
+#                os._exit
                 
             with buf.map(Gst.MapFlags.WRITE | Gst.MapFlags.READ) as info:
                 info.data[0] = b_len[0]
@@ -179,6 +183,10 @@ class metis_source(GstBase.BaseSrc, MetisConfig):
             if os.path.getsize(self.in_file) > self.file_offset:
         
                 type, sub = self.process_record(buf)
+                
+                if type == -1 and sub == -1:
+                    self.pipeline.set_state(Gst.State.PAUSED)
+                    return Gst.FlowReturn.FLUSHING
             
 #                print(f"record number {self.rec_id} length {len} type {type} subtype {sub}")
 #                print(f"1 type = {type} sub = {sub}")
@@ -206,6 +214,9 @@ class metis_source(GstBase.BaseSrc, MetisConfig):
                     type, sub = self.process_record(buf)
 #                    print(f"record number {self.rec_id} length {len} type {type} subtype {sub}")
 #                    print(f"2 type = {type} sub = {sub}")
+                    if type == -1 and sub == -1:
+                        self.pipeline.set_state(Gst.State.PAUSED)
+                        return Gst.FlowReturn.FLUSHING
 
                     # Check for MRR record - end of file
                     if (type == 1 and sub == 20) or (type == 0 and sub == 0):

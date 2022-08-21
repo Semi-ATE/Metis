@@ -18,8 +18,8 @@ from gi.repository import Gst
 org_file = os.path.join(test_loc, "test.std")
 src_file1 = os.path.join(test_loc,  "test.std.src1")
 src_file2 = os.path.join(test_loc,  "test.std.src2")
-src_file3 = os.path.join(test_loc,  "test.std.src4")
-src_file4 = os.path.join(test_loc,  "test.std.src5")
+src_file3 = os.path.join(test_loc,  "test.std.src3")
+src_file4 = os.path.join(test_loc,  "test.std.src4")
 dst_file = os.path.join(test_loc, "test.std.dst")
 yaml_file = os.path.join(test_loc, "test_metisd.yaml")
 wrong_yaml_file = os.path.join(test_loc, "nometisd.yaml")
@@ -90,6 +90,7 @@ def test_config_not_exist():
                 out_file.write(rec)
                 out_file.close()
     
+    thread.join()
     res = os.path.exists(dst_file)
     if os.path.exists(wrong_yaml_file):
         os.rename(wrong_yaml_file,yaml_file)
@@ -99,7 +100,7 @@ def test_config_not_exist():
     if os.path.exists(src_file1):
         os.remove(src_file1)
 
-def test_negative_byteorder():
+def test_wrong_byteorder():
 
     Gst.init(None)
     Gst.debug_set_active(True)
@@ -112,6 +113,8 @@ def test_negative_byteorder():
         os.remove(dst_file)
      
     thread = threading.Thread(target=start_stream, args=(src_file2, dst_file, yaml_file))
+
+    thread.start()
     
     byteorder = None
 
@@ -149,7 +152,6 @@ def test_negative_byteorder():
                 out_file.write(ver)
                 out_file.close()
                 
-                thread.start()
             else:
                 len_rec = int.from_bytes(rec_len, byteorder)
                 # Get rest of the record
@@ -161,6 +163,7 @@ def test_negative_byteorder():
                 out_file.write(rec)
                 out_file.close()
 
+    thread.join()
     res = os.path.exists(dst_file)
     assert res == False
 
@@ -168,7 +171,7 @@ def test_negative_byteorder():
         os.remove(src_file2)
 
     
-def test_negative_exist():
+def test_src_file_deleted():
 
     Gst.init(None)
     Gst.debug_set_active(True)
@@ -181,11 +184,17 @@ def test_negative_exist():
         os.remove(dst_file)
      
     thread = threading.Thread(target=start_stream, args=(src_file3, dst_file, yaml_file))
+
+    thread.start()
     
     byteorder = None
 
     with open(org_file, "rb") as in_file:
          while(True):
+            
+            if byteorder != None and os.path.exists(src_file3) == False:
+                break
+            
             out_file = open(src_file3, "ab")
             # Get record length
             rec_len = in_file.read(2)
@@ -216,19 +225,16 @@ def test_negative_exist():
                 out_file.write(ver)
                 out_file.close()
                 
+                # delete 
                 os.remove(src_file3)
-                
-                thread.start()
-    
-                break;
-                
+
     res = os.path.exists(dst_file)
     assert res == False
 
     if os.path.exists(src_file3):
         os.remove(src_file3)
 
-def test_negative_version():
+def test_wrong_version():
 
     Gst.init(None)
     Gst.debug_set_active(True)
@@ -241,6 +247,8 @@ def test_negative_version():
         os.remove(dst_file)
      
     thread = threading.Thread(target=start_stream, args=(src_file4, dst_file, yaml_file))
+
+    thread.start()
     
     byteorder = None
 
@@ -277,7 +285,6 @@ def test_negative_version():
                 out_file.write(ver)
                 out_file.close()
                 
-                thread.start()
             else:
                 len_rec = int.from_bytes(rec_len, byteorder)
                 # Get rest of the record
@@ -289,6 +296,7 @@ def test_negative_version():
                 out_file.write(rec)
                 out_file.close()
 
+    thread.join()
     res = os.path.exists(dst_file)
     assert res == False
     if os.path.exists(src_file4):
