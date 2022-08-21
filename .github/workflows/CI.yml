@@ -24,6 +24,7 @@ jobs:
         run: |
           sudo apt-get install -y libhdf5-dev inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools gstreamer1.0-python3-plugin-loader 
           pip install -r requirements/test.txt
+          pip install --no-binary=h5py h5py
           pwd
           ls -la
           echo "========= conda list   ==========="
@@ -34,6 +35,7 @@ jobs:
           pip3 list
           echo "========= debian gst*.deb list   ==========="
           dpkg -l | grep gst
+          dpkg -l | grep hdf5
           echo "========= home cache folder   ==========="
           ls -la ~/.cache
           echo "========= METIS plugins folder ==========="
