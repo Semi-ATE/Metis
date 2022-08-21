@@ -7,8 +7,8 @@ import os
 import time
 import logging
 from datetime import datetime
-import numpy as np
 import h5py
+import numpy as np
 
 try:
     from .MetisConfig import MetisConfig
