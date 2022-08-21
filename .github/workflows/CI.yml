@@ -48,6 +48,8 @@ jobs:
           echo "========= PWD folder ==========="
           echo $PWD
           gst-inspect-1.0 > gst_plugins_list
+          echo "========= sys.path file   ==========="
+          cat ./sys.path
           echo "========= home cache folder   ==========="
           ls -la ~/.cache/gstreamer-1.0/
           echo "========= gst plugin list     ==========="
