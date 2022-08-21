@@ -59,16 +59,18 @@ class SHP():
     COL_STDF_FILE_NAME = 'STDF_FILE_NAME'
     COL_STDF_FOLDER_NAME = 'STDF_FOLDER_NAME'
     
-    def __init__(self, debug=False):
+    def __init__(self, debug=False, update_progress=None):
         
         print(tool_name)
         
         self.debug = debug
         self.records_count = 0
-        
+        self.cur_record = 0
+        self.update_progress = update_progress
+
         if self.debug:
             print("Debug is enabled")
-            
+
     def import_stdf_into_hdf5(self, input_stdf_file, output_folder, disable_progress = False, disable_trace = False):
         '''
         Imports binary STDF file into HDF5 file in the following sequence:
@@ -360,6 +362,10 @@ class SHP():
                 len_rec = int.from_bytes(rec_len, byteorder)
                 # Get rest of the record
                 rec = f.read(len_rec)
+                
+                self.cur_record += 1
+                if self.update_progress is not None:
+                    self.update_progress(self.cur_record, self.records_count)
 
                 if disable_progress == False:
                     progress.update(1)
