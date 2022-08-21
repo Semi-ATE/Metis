@@ -24,7 +24,8 @@ jobs:
       - name: Create conda env
         shell: bash
         run:
-          conda create  -c conda-forge -n "gst" python==3.10.5
+          conda create -c conda-forge -n gst python==3.10.5
+          conda init shell
       - name: Setup dependencies
         shell: bash
         run: |
