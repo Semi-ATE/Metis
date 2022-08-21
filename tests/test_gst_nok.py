@@ -1,11 +1,9 @@
 import os
 test_loc = os.path.dirname(__file__)
-print(f"test_gst_nok test_loc {test_loc}")
 from pathlib import Path
 root_loc = Path(test_loc).parent
-print(f"test_gst_nok root_loc {root_loc}")
 os.environ['GST_PLUGIN_PATH'] = os.path.join(root_loc, "Metis")
-print(f"test_gst_nok.py GST_PLUGIN_PATH = {os.environ['GST_PLUGIN_PATH']}")
+#print(f"test_gst_nok.py GST_PLUGIN_PATH = {os.environ['GST_PLUGIN_PATH']}")
 
 import gi
 import threading

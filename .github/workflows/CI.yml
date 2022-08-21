@@ -4,19 +4,6 @@ on: [push]
 
 env:
   GST_PLUGIN_PATH: /home/runner/work/Metis/Metis/Metis
-
-#          python-version: '3.10.5'
-#          pip install -r requirements/run.txt
-#          pip install -r requirements/test.txt
-#          conda install -c conda-forge gst-plugins-base==1.20.3 gst-python==1.20.3 gstreamer==1.20.3 pyaml yaml h5py
-#          pip3 install gobject PyGObject inotify  pytest pytest-cov check-manifest setuptools twine tree tqdm semi-ate-stdf pandas tables pyyaml
-#          mamba install -c conda-forge gst-plugins-base gst-python gstreamer
-#          pip install wheel
-#          pip install h5py pytest pytest-cov check-manifest setuptools twine tree tqdm semi-ate-stdf pandas tables gobject PyGObject inotify pyaml
-#      - name: Setup python
-#        uses: actions/setup-python@v2
-#        with:
-#          python-version: '3.10.5'
   
 jobs:
   test-linux:
@@ -31,45 +18,10 @@ jobs:
         run: |
           sudo apt-get install -y libhdf5-dev inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools gstreamer1.0-python3-plugin-loader gir1.2-gstreamer-1.0 gstreamer1.0-clutter-3.0 gstreamer1.0-crystalhd gstreamer1.0-gl gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio gstreamer1.0-x libclutter-gst-3.0-0 libgstreamer-gl1.0-0 libgstreamer-plugins-base1.0-0 libgstreamer-plugins-good1.0-0 libgstreamer1.0-0 libgstreamer1.0-dev inotify-tools libinotifytools0
           pip install tables gobject inotify
-          python test.py
-          pytest -s test.py
-          sudo apt-get install -y mlocate
-          locate *h5py*.so libhdf5_cpp.so
-          echo "???????????????"
-          echo "========= python version ==========="
-          python --version
-          echo "========= /usr/lib/python3.8 ==========="
-          ls -la /usr/lib/python3.8
-          pwd
-          ls -la
-          echo "========= conda list   ==========="
-          conda list 
-          echo "========= pip list   ==========="
-          pip list
-          echo "========= debian gst*.deb list   ==========="
-          dpkg -l | grep gst
-          dpkg -l | grep hdf5
-          echo "========= home cache folder   ==========="
-          ls -la ~/.cache
-          echo "========= METIS plugins folder ==========="
-          ls -la /home/runner/work/Metis/Metis/Metis
-          echo "========= PWD folder ==========="
-          echo $PWD
-          GST_DEBUG=6 gst-inspect-1.0 > gst_plugins_list
-          echo "========= sys_source.path file   ==========="
-          cat /home/runner/work/Metis/Metis/sys_source.path
-          echo "========= sys_sink.path file   ==========="
-          cat /home/runner/work/Metis/Metis/sys_sink.path
-          ls -la
-          echo "========= home cache folder   ==========="
-          ls -la ~/.cache/gstreamer-1.0/
-          echo "========= gst plugin list     ==========="
-          cat gst_plugins_list
+          gst-inspect-1.0
           pytest -s
-#         inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools gstreamer1.0-python3-plugin-loader 
-#         pytest pytest-cov check-manifest setuptools twine tree tqdm semi-ate-stdf pandas tables gobject PyGObject inotify pyaml
-#          pip install -r requirements/test.txt
-#         inotify-tools libgirepository1.0-dev gstreamer-1.0 gstreamer1.0-tools gstreamer1.0-python3-plugin-loader 
+#          GST_DEBUG=6 gst-inspect-1.0 > gst_plugins_list
+#          cat gst_plugins_list
          
 #      - name: Run tests
 #        shell: bash
@@ -85,27 +37,6 @@ jobs:
 
 #          pytest -s
 #          bash scripttest.sh
-#      - name: Create package
-#        run: python setup.py sdist
-#      - name: Check package
-#        run: twine check dist/*
-#      - name: Check manifest 
-#        run: check-manifest
-#  test-windows:
-#    runs-on: windows-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v2
-#      - name: Setup python
-#        uses: actions/setup-python@v2
-#        with:
-#          python-version: '3.8'
-#      - name: Setup dependencies
-#        run: |
-#          pip install -r requirements/run.txt
-#          pip install -r requirements/test.txt
-#      - name: Run tests
-#        run: pytest tests/ --cov=Semi_ATE
 #      - name: Create package
 #        run: python setup.py sdist
 #      - name: Check package
