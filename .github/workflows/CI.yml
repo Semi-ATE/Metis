@@ -24,8 +24,9 @@ jobs:
       - name: Create conda env
         shell: bash
         run:
-          conda create -c conda-forge -n gst python==3.10.5
-          conda init shell
+          conda config --add channels conda-forge
+          conda create -n gst python==3.10.5
+          conda init bash
       - name: Setup dependencies
         shell: bash
         run: |
