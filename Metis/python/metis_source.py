@@ -93,6 +93,8 @@ class metis_source(GstBase.BaseSrc, MetisConfig):
         self.pipeline = pipeline
 
     def process_record(self, buf):
+        logging.info(f'process_record started in source, file:{self.in_file}, time:{datetime.now()}.')
+
         b_len = self.file.read(2)
         b_type = self.file.read(1)
         b_sub = self.file.read(1)
@@ -169,7 +171,8 @@ class metis_source(GstBase.BaseSrc, MetisConfig):
         return type, sub
         
     def do_fill(self, offset, length, buf):
-        
+        logging.info(f'do_fill started in source, file:{self.in_file}, time:{datetime.now()}.')
+                
         self.queue = buf
         buf.memset(0, 0, self.max_needed_buffer_size)
         

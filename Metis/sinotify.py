@@ -39,6 +39,10 @@ def _main():
 
     path = conf_data['metis']['paths']['main-daemon-path']
     write_path = conf_data['metis']['paths']['write-path']
+
+    if not os.path.isdir(path):
+        os.mkdir(path)
+
     files = os.listdir(path)
     i = inotify.adapters.InotifyTree(path) 
     #add already existing files to watch list

@@ -22,6 +22,7 @@ case "$1" in
     configure)
     	touch /var/log/metisd.log
 	chmod 777 /var/log/metisd.log
+	chmod +wx /usr/bin/stdf2ph5.py
 	chmod +x /usr/share/metis/start_metis.sh
     ;;
 esac

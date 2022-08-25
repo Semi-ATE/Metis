@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+#!/usr/bin/env python
+
 import argparse
 import time
 import os
@@ -71,12 +73,12 @@ class SHP():
         if self.debug:
             print("Debug is enabled")
 
-    def import_stdf_into_hdf5(self, input_stdf_file, output_folder, disable_progress = False, disable_trace = False):
+    def import_stdf_into_hdf5(self, input_stdf_file, output_folder, group = STDF_FILES_DIR, disable_progress = False, disable_trace = False):
         '''
         Imports binary STDF file into HDF5 file in the following sequence:
         1. Takes the LOT_ID field value from the STDF MIR record
         2. Creates LOT_ID.hdf5 file if not exists
-        3. Creates HDF5 group (folder) with name STDF_FILES_DIR if does not exists
+        3. Creates HDF5 group (folder) with name STDF_FILES_DIR(only if argument group isnt used) if does not exists
         4. Imports the stdf file in the STDF_FILES_DIR. A check will be performed if the file is already imported
 
         Parameters
@@ -85,6 +87,8 @@ class SHP():
             Location and name of the STDF file which will be imported into the HDF5 file.
         output_folder : string
             Output folder where the HDF5 file will be created if not exists.
+        group: string
+            HDF5 group where the STDF file will be imported(optional)
 
         Returns
         -------
@@ -134,8 +138,8 @@ class SHP():
                 return
             
         # Make HDF5 file if not exists
-        hdf5_file = os.path.join(out_folder, lot_id + ".hdf5")
-        res = HDF5Helper.import_binary_file(hdf5_file, SHP.STDF_FILES_DIR, stdf_file)
+        hdf5_file = os.path.join(out_folder, lot_id + ".h5")
+        res = HDF5Helper.import_binary_file(hdf5_file, group, stdf_file)
         if res:
             self.stdf2pandas(stdf_file, hdf5_file, disable_progress, disable_trace)
 
@@ -587,6 +591,10 @@ def main():
                         required=False,
                         help='Debug flag')
 
+    parser.add_argument('-g', '--group',
+                        required=False,
+                        help='Group in HDF5 file')
+
     args = parser.parse_args()
     
     if args.debug:
@@ -597,7 +605,7 @@ def main():
     
     stdf2hdf52pandas = SHP(debug)
     for input_file in args.input:
-        stdf2hdf52pandas.import_stdf_into_hdf5(input_file, args.output)
+        stdf2hdf52pandas.import_stdf_into_hdf5(input_file, args.output, args.group)
     
     
 if __name__ == "__main__":
