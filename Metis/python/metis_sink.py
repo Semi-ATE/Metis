@@ -10,6 +10,15 @@ import numpy as np
 import pandas as pd
 
 try:
+    from usr.bin.STDFHelper import STDFHelper
+    from usr.bin.HDF5Helper import HDF5Helper
+    from usr.bin.stdf2ph5 import SHP  
+except:
+    from Metis.tools.STDFHelper import STDFHelper
+    from Metis.tools.HDF5Helper import HDF5Helper
+    from Metis.tools.stdf2ph5 import SHP  
+
+try:
     from .MetisConfig import MetisConfig
 except:
     cwd = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -153,7 +162,8 @@ class metis_sink(GstBase.BaseSink, MetisConfig):
                 # Check for MRR record - end of file
                 if b_type == 1 and b_sub == 20:
                     line = "/"
-                    os.system(f"stdf2ph5.py -i {self.filename} -o {path_yam} -g {line}")
+                    stdf2hdf52pandas = SHP(True)
+                    stdf2hdf52pandas.import_stdf_into_hdf5(self.filename, path_yam, line)
                             
                    #print("test_sink : EOF")
                     logging.info(f'Sink EOF, file:{self.filename}, time:{datetime.now()}.')
