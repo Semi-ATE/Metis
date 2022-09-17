@@ -26,7 +26,7 @@ dst_file = os.path.join(test_loc, "test.std.dst")
 yaml_file = os.path.join(test_loc, "test_metisd.yaml")
 
 def test_gst_pass():
-
+    org_file = os.path.join(test_loc, "test.std")
     Gst.init(None)
     Gst.debug_set_active(True)
     Gst.debug_set_default_threshold(3)
@@ -92,13 +92,12 @@ def test_gst_pass():
                 out_file.close()
 
     thread.join()
-    res = filecmp.cmp(org_file, dst_file, shallow=False)
-    assert res == True
+    res = filecmp.cmp(org_file, dst_file, shallow=False)#test for stdf file contents
     
     if os.path.exists(src_file):
         os.remove(src_file)
 
-def test_h5py_types():
+##def test_h5py_types():
 
     with open(yaml_file, "r") as f:
         config_data = safe_load(f)
@@ -154,15 +153,17 @@ def test_h5py_types():
             if dataframe_value.shape[0] != types_with_count[record]:
                 print(types_with_count[record])
                 print(record)
-                block_value = False
+                block_value = False#test for dataframe values in record
 
     print(hdf5_types)
 
     # replace assertions by conditions
-    if set(hdf5_types) != set(types):
+    if set(hdf5_types) != set(types):#test for missing record types
         errors.append("Missing types in hdf5 file.")
     if not block_value:
         errors.append("Block values in dataframe are wrong.")
+    if not res:
+        errors.append("Stdf files have contents are wrong.");     
 
     # assert no error message has been registered, else print messages
     assert not errors, "errors occured:\n{}".format("\n".join(errors))
