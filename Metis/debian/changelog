@@ -1,5 +1,5 @@
-metis-server (0.0.1) stable; urgency=low
+metis-server (__VERSION__) stable; urgency=low
 
   * See changelog file in the github release page.
 
- -- Velislav-Boyanov <vboy@semi-ate.com>  ср, 24 авг 2022 10:34:58 +0300
+ -- Velislav-Boyanov <vboy@semi-ate.com>  __DATE_TIME__
