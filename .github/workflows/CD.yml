@@ -28,7 +28,7 @@ jobs:
           pytest -s
       - name: Set release version
         run:
-          echo -e "'${GITHUB_REF#refs/*/}'" > Metis/ver
+          echo -e "${GITHUB_REF#refs/*/}" > Metis/ver
       - name: Create debian package
         run: | 
           mkdir dist
