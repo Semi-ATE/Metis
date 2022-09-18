@@ -4,9 +4,19 @@ import os
 import time
 import logging
 from datetime import datetime
-
+import importlib.util
 import h5py
 import numpy as np
+import pandas as pd
+
+try:
+    from usr.bin.STDFHelper import STDFHelper
+    from usr.bin.HDF5Helper import HDF5Helper
+    from usr.bin.stdf2ph5 import SHP  
+except:
+    from Metis.tools.STDFHelper import STDFHelper
+    from Metis.tools.HDF5Helper import HDF5Helper
+    from Metis.tools.stdf2ph5 import SHP  
 
 try:
     from .MetisConfig import MetisConfig
@@ -76,6 +86,7 @@ class metis_sink(GstBase.BaseSink, MetisConfig):
              
     
     def do_render(self, buffer):
+        logging.info(f'Do render started in sink, file:{self.filename}, time:{datetime.now()}.')
 
         if self.file == None:
             self.file = open(self.filename, "ba")
@@ -115,24 +126,29 @@ class metis_sink(GstBase.BaseSink, MetisConfig):
                     
                     for i in range(len_lot_id):
                         self.lot += chr(my_data[20+i])
-                    
+
                     self.time1 = time.time()
-                    logging.debug(f'Sink LOT_ID found, file:{self.filename}, lot-id:{self.lot}, time:{datetime.now()}.')
+                    logging.info(f'Sink LOT_ID found, file:{self.filename}, lot-id:{self.lot}, time:{datetime.now()}.')
                 
                 
                 if self.lot != "":
                     path_yam = self.config['metis']['paths']['write-path'] 
-                    hdf_path = path_yam + self.lot + '.h5'
+                    hdf_path = os.path.join(path_yam, str(self.lot + '.h5'))
                     
                     count = flen+4
 
                     with h5py.File(hdf_path, 'a') as output_file:
-                        if os.path.basename(self.filename) not in output_file.keys():
-                            ds = output_file.create_dataset(os.path.basename(self.filename), (0,1), maxshape=(None,1), dtype='u1', chunks=True)
+                        if "/backup" not in output_file.keys():
+                            grp = output_file.create_group("/backup")
+                        else:
+                            grp = output_file["/backup"]
+
+                        if str("/backup/" + os.path.basename(self.filename)) not in output_file.keys():
+                            ds = grp.create_dataset(os.path.basename(self.filename), (0,1), maxshape=(None,1), dtype='u1', chunks=True)
                             data = np.frombuffer(self.queue, dtype='u1', count = -1)
                         else:
                             name = os.path.basename(self.filename)
-                            ds = output_file[name]
+                            ds = grp[name]
                         
                             data = np.frombuffer(my_data, dtype='u1', count = count)   
                             
@@ -145,6 +161,9 @@ class metis_sink(GstBase.BaseSink, MetisConfig):
 
                 # Check for MRR record - end of file
                 if b_type == 1 and b_sub == 20:
+                    line = "/"
+                    stdf2hdf52pandas = SHP(True)
+                    stdf2hdf52pandas.import_stdf_into_hdf5(self.filename, path_yam, line)
                             
                    #print("test_sink : EOF")
                     logging.info(f'Sink EOF, file:{self.filename}, time:{datetime.now()}.')

@@ -1,11 +1,9 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 metis:
-    paths:
-        main-daemon-path: "/tmp/stdf"
-        write-path: "/tmp/"
-        pid-path: "/tmp/metisd.pid"
-    log:    
-        logging: 1 # 0=>logging off, 1=>logging on
-        log-path: "/tmp/metisd.log"
-        log-level: "INFO" # "INFO" "WARNING" "ERROR" "DEBUG" "CRITICAL" "NOTSET"
+  log:
+    log-level: INFO
+    log-path: /tmp/metisd.log
+    logging: 1
+  paths:
+    main-daemon-path: /tmp/stdf
+    pid-path: /tmp/metisd.pid
+    write-path: /home/nz/gitrepos/Metis/tests

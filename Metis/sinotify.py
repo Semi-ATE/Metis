@@ -39,6 +39,16 @@ def _main():
 
     path = conf_data['metis']['paths']['main-daemon-path']
     write_path = conf_data['metis']['paths']['write-path']
+
+    if not os.path.isdir(path):
+        logging.info(f'Sinotify cant find {path}, file path was created manually, time:{datetime.now()}.')
+        os.mkdir(path)
+    
+    if not os.path.isdir(write_path):
+        logging.info(f'Sinotify cant find {write_path}, file write path was created manually, time:{datetime.now()}.')
+        os.mkdir(write_path)
+    
+    
     files = os.listdir(path)
     i = inotify.adapters.InotifyTree(path) 
     #add already existing files to watch list

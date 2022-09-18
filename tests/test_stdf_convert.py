@@ -31,7 +31,7 @@ def test_SHP():
     out_folder = str('test_result')
     shp.import_stdf_into_hdf5(stdf_file, out_folder)
 
-    hdf5_file = os.path.join(out_folder, '12345.hdf5')
+    hdf5_file = os.path.join(out_folder, '12345.h5')
 
     f = h5py.File(hdf5_file,'r')
 

@@ -10,6 +10,8 @@ build:
 binary: 
 	mkdir -p debian/metis-server/etc/systemd/system
 	mkdir -p debian/metis-server/usr/share/metis/python
+	mkdir -p debian/metis-server/usr/bin
+	cp -a tools/. debian/metis-server/usr/bin
 	cp metisd.yaml debian/metis-server/etc
 	cp sinotify.py debian/metis-server/usr/share/metis
 	cp systemd/start_metis.sh debian/metis-server/usr/share/metis
