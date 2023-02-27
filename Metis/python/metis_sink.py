@@ -9,15 +9,8 @@ import h5py
 import numpy as np
 import pandas as pd
 
-try:
-    from usr.bin.STDFHelper import STDFHelper
-    from usr.bin.HDF5Helper import HDF5Helper
-    from usr.bin.stdf2ph5 import SHP  
-except:
-    from Metis.tools.STDFHelper import STDFHelper
-    from Metis.tools.HDF5Helper import HDF5Helper
-    from Metis.tools.stdf2ph5 import SHP  
-
+#local imports
+from tools import SHP  
 try:
     from .MetisConfig import MetisConfig
 except:
