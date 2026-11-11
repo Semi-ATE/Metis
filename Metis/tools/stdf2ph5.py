@@ -443,7 +443,7 @@ class SHP():
                 for field in fields:
                     if field in str_fields:
                         data[field] = data[field].astype('|S')
-                data.to_hdf(output_file, data_loc, complevel = 9);
+                data.to_hdf(output_file, key=data_loc, complevel = 9)
                 os.remove(fn)
 
         stop = time.time()
